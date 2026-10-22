@@ -1,0 +1,8 @@
+{{/*
+  Fecha en español, sin depender de la localización de Hugo.
+  Uso:  {{ partial "fecha-es.html" (dict "fecha" (.Date.Format "2006-01-02")) }}
+  Se le pasa siempre una cadena AAAA-MM-DD.
+*/}}
+{{- $f := time.AsTime .fecha -}}
+{{- $meses := slice "enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre" -}}
+{{- printf "%d de %s de %d" $f.Day (index $meses (sub (int $f.Month) 1)) $f.Year -}}

@@ -17,8 +17,8 @@
       {{- range . }}
       <p class="panel-destacado"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
       <p class="panel-meta">
-        Publicado el {{ .Date.Format "2 de enero de 2006" }}
-        {{- with .Params.validated_at }} · revisado el {{ (time .).Format "2 de enero de 2006" }}{{ end }}
+        Publicado el {{ partial "fecha-es.html" (dict "fecha" (.Date.Format "2006-01-02")) }}
+        {{- with .Params.validated_at }} · revisado el {{ partial "fecha-es.html" (dict "fecha" .) }}{{ end }}
       </p>
       {{- end }}
     {{- else }}
@@ -49,7 +49,7 @@
       {{- end }}
       <p class="panel-meta">
         <a href="https://github.com/{{ site.Params.repoGitHub }}/issues" rel="noopener">Ver todas las peticiones</a>
-        {{- with .ultimo_commit }} · última actualización del repositorio: {{ (time .).Format "2 de enero de 2006" }}{{ end }}
+        {{- with .ultimo_commit }} · última actualización del repositorio: {{ partial "fecha-es.html" (dict "fecha" .) }}{{ end }}
       </p>
     {{- end }}
   </div>
