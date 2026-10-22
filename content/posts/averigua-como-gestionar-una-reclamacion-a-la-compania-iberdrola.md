@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Tras la liberalización del mercado energético en España, hay varias comercializadoras que se encargan de la gestión y el cobro de la luz en los hogares del país. Estas grandes empresas tienen que hace"
 draft: false
 category: ["Uncategorized"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-07-30
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Tras la <strong>liberalización del mercado energético en España</strong>, hay varias comercializadoras que se encargan de la gestión y el cobro de la luz en los hogares del país. Estas grandes empresas tienen que hacer frente diariamente a <strong>sugerencias, quejas o reclamaciones </strong>por parte de los clientes. Este contacto entre empresa y consumidor se realiza por diversas vías.  </p>

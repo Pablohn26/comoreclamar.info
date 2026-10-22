@@ -9,6 +9,11 @@ summary: "Amazon dispone en su propia página web de enlace para cualquier tipo 
 draft: false
 category: ["Reclamación"]
 tag: ["web", "compra online"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-03-12
+legacy: true
 ---
 Amazon dispone en su propia página web de enlace para cualquier tipo de reclamación.Problemas con los pedidos, devoluciones, formas de pago, etc..
 

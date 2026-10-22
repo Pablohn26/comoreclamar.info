@@ -1,0 +1,9 @@
+{{/*
+  Única fuente de verdad de qué se publica.
+  Una página solo entra si su frontmatter dice `status: validated`.
+  Si el campo falta, la página NO se publica: así un artículo nuevo de un bot
+  no aparece por olvido, sino solo cuando alguien lo valida.
+*/}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $validados := where $posts "Params.status" "validated" -}}
+{{- return $validados -}}

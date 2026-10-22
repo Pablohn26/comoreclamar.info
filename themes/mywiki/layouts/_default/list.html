@@ -1,6 +1,6 @@
 {{ define "main" }}
 <div id="home-main" class="home-main">
-{{ $pag := .Paginate .Pages }}
+{{ $pag := .Paginate (cond (eq .Section "posts") (where .Pages "Params.status" "validated") .Pages) }}
 {{ range $pag.Pages }}{{ partial "entrada.html" . }}{{ end }}
 {{ partial "pagination.html" . }}
 </div>

@@ -9,5 +9,10 @@ summary: "Transabus, la empresa de autobuses de Mallorca, dispone de un formular
 draft: false
 category: ["Reclamación"]
 tag: ["autobuses", "España", "transporte", "web", "Mallorca"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2026-12-18
+legacy: true
 ---
 Transabus, la empresa de autobuses de Mallorca, dispone de un formulario web para tramitar las reclamaciones. Haz click <a href="http://www.transabus.com/contacto-reclamaciones-y-sugerencias/">aquí</a><a href="https://www.alsa.es/contacto/hacer-una-reclamacion" target="_blank"> </a>para hacer una reclamación.

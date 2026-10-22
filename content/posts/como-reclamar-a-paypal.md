@@ -9,6 +9,11 @@ summary: "PayPal dispone en su propia página web de enlace para cualquier tipo 
 draft: false
 category: ["Reclamación"]
 tag: ["web", "cuentas online"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-03-26
+legacy: true
 ---
 PayPal dispone en su propia página web de enlace para cualquier tipo de reclamación. problemas con la cuenta, verificación y solicitud de un rembolso, vinculación de tarjetas, etc..
 

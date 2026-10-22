@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "A menudo ocurre que cuando contratamos los servicios de grandes empresas no todo transcurre según lo esperado. Es por ello que se suele habilitar un espacio a modo de contacto para comunicar incidenci"
 draft: false
 category: ["Reclamación"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-06-18
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>A menudo ocurre que cuando contratamos los servicios de grandes empresas no todo transcurre según lo esperado. Es por ello que se suele habilitar un espacio a modo de contacto para<strong> comunicar incidencias o realizar reclamaciones</strong>. A continuación se muestra un pequeño manual que ayudará al cliente a gestionar mejor sus reclamaciones. <br></p>

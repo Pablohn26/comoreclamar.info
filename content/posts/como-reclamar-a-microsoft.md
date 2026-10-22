@@ -9,6 +9,11 @@ summary: "Microsoft, el gigante informático y electrónico dispone en su propia
 draft: false
 category: ["Reclamación"]
 tag: ["web", "informática", "electronica"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-01-29
+legacy: true
 ---
 Microsoft, el gigante informático y electrónico dispone en su propia página web de enlace para cualquier tipo de reclamación.
 Haz click <a href="http://www.microsoft.com/es-es/moviles/soporte/contacto/email-us/#">aquí</a> para hacer tu reclamación.

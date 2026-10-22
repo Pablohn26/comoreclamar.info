@@ -9,6 +9,11 @@ summary: "La S.G.A.E. dispone en su propia página web de enlace para cualquier 
 draft: false
 category: ["Reclamación"]
 tag: ["Impuestos", "comercio", "precio"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-01-15
+legacy: true
 ---
 La S.G.A.E. dispone en su propia página web de enlace para cualquier tipo de reclamación, así cómo un calendario con las fechas en las que se pueden hacer reclamaciones.
 Haz click <a href="http://www.sgae.es/socios/musica/gestiona-tus-derechos/reclamaciones/">aquí</a> para hacer tu reclamación.

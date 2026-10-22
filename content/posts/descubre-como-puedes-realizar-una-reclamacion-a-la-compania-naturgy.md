@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Comprender el funcionamiento de las empresas comercializadoras de luz y gas es complicado, y más tras la liberalización del mercado. Es por ello que los servicios de atención al cliente en empresas co"
 draft: false
 category: ["Reclamación"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-09-10
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Comprender el

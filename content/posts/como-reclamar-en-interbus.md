@@ -9,5 +9,10 @@ summary: "Interbus, la empresa de autobuses interurbanos de Madrid, dispone de u
 draft: false
 category: ["Reclamación"]
 tag: ["autobuses", "transporte", "web", "Madrid"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2026-11-20
+legacy: true
 ---
 Interbus, la empresa de autobuses interurbanos de Madrid, dispone de un formulario web para tramitar las reclamaciones. Haz click <a href="https://www.interbus.es/web/guest/Reclamaciones" target="_blank">aquí</a><a href="https://www.alsa.es/contacto/hacer-una-reclamacion" target="_blank"> </a>para hacer una reclamación a Interbus.

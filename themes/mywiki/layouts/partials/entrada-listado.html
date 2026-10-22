@@ -1,5 +1,5 @@
 {{ $page := . }}
-{{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
+{{ $pag := .Paginate (partial "paginas-validadas" .) }}
 {{ range $pag.Pages }}
 <article id="post-{{ .File.UniqueID | truncate 6 "" }}" class="clearfix post type-post status-publish format-standard hentry" role="article">
   <header>

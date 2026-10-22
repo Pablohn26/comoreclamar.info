@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Telefónica es una de las principales empresas de nuestro país. Esta gigante multinacional se encuentra al servicio de gran parte de los españoles. Es por ello que se cumple el servicio de atención al "
 draft: false
 category: ["Reclamación"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-06-04
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Telefónica es una de las principales empresas de nuestro país. Esta gigante multinacional se encuentra al servicio de gran parte de los españoles. Es por ello que se cumple el servicio de atención al cliente tenga que hacer frente a constantes sugerencias, peticiones de información y, por supuesto, reclamaciones. <br></p>

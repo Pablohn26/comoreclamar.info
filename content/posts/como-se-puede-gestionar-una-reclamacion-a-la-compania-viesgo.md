@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Verse envuelto en un proceso de reclamaciones con cualquier compañía puede resultar un proceso lento y tedioso. En el caso de las compañías energéticas puede serlo aún más, dado a su alta dificultad p"
 draft: false
 category: ["Reclamación"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-08-27
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Verse envuelto en un

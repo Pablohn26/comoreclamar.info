@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Muchas personas se encuentran casi diariamente en la tesitura de tener que gestionar una reclamación a su compañía de Internet sin saber cómo. Existen diferencias en función de la compañía, por lo que"
 draft: false
 category: ["Uncategorized"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-07-02
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Muchas personas se

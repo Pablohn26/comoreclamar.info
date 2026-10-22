@@ -9,6 +9,11 @@ summary: "El grupo Inditex es uno de los más prestigiosos, no sólo en España,
 draft: false
 category: ["Reclamación"]
 tag: ["ropa"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-05-21
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>El grupo <strong>Inditex

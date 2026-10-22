@@ -9,6 +9,11 @@ summary: "Para reclamar a suertia.es hay que mandar un correo a \"ayuda@suertia.
 draft: false
 category: ["Reclamación"]
 tag: ["web", "correo electrónico", "apuestas"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2026-12-04
+legacy: true
 ---
 Para reclamar a <a href="http://suertia.es" target="_blank">suertia.es</a>  hay que mandar un correo a <a href="http://%22ayuda@suertia.es/" target="_blank">"ayuda@suertia.es</a>"
 con el asunto "Reclamación" y el texto de reclamación. Ellos se encargarán de tramitarlo internamente.

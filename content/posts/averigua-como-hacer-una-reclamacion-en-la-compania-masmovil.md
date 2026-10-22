@@ -8,6 +8,11 @@ author: "Pablo"
 summary: "Cuando cualquier usuario desea realizar una queja, reclamación o sugerencia, tiene varios canales habilitados para ello. Ya sea por vía oficial a través de la empresa a la que quiere reclamar o por me"
 draft: false
 category: ["Reclamación"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-08-13
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Cuando cualquier usuario desea realizar una queja, <strong>reclamación o sugerencia</strong>, tiene varios canales habilitados para ello. Ya sea por vía oficial a través de la empresa a la que quiere reclamar o por medio de plataformas o <strong>servicios profesionales</strong> encargados de organizar este tipo de cuestiones.  </p>

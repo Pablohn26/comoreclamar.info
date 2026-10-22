@@ -9,6 +9,11 @@ summary: "Pc componentes dispone en su propia página web de enlace para cualqui
 draft: false
 category: ["Reclamación"]
 tag: ["web", "informática", "electronica"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-04-09
+legacy: true
 ---
 Pc componentes dispone en su propia página web de enlace para cualquier tipo de reclamación. para información del pedido, garantías, etc..
 

@@ -9,6 +9,11 @@ summary: "Vodafone dispone en su propia página web de enlace para cualquier tip
 draft: false
 category: ["Reclamación"]
 tag: ["telefonía", "móviles"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-04-23
+legacy: true
 ---
 Vodafone dispone en su propia página web de enlace para cualquier tipo de reclamación. Gestiona queja o duda, consultas de facturas.
 

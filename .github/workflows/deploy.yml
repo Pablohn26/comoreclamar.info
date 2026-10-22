@@ -1,0 +1,74 @@
+name: Construir y desplegar
+
+# Se dispara al integrar en main. Más adelante se añadirán los eventos de issues
+# para que la portada refleje las peticiones nuevas sin esperar a un commit.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: despliegue
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  desplegar:
+    name: Hugo → servidor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.168.0'
+          extended: true
+
+      - name: Construir (solo contenido validado)
+        run: |
+          bash bin/build.sh public --baseURL "${{ vars.SITE_BASEURL }}"
+          echo "Páginas generadas: $(find public -name '*.html' | wc -l)"
+
+      - name: Preparar la clave de despliegue
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Subir la versión nueva
+        id: subir
+        run: |
+          TS=$(date -u +%Y%m%d-%H%M%S)
+          echo "version=$TS" >> "$GITHUB_OUTPUT"
+          SSH="ssh -i ~/.ssh/deploy_key -o BatchMode=yes ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}"
+          $SSH "mkdir -p /var/www/releases/futuro/$TS"
+          rsync -az --delete -e "ssh -i ~/.ssh/deploy_key -o BatchMode=yes" \
+            public/ "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/var/www/releases/futuro/$TS/"
+          echo "Subido a releases/futuro/$TS"
+
+      - name: Activar la versión (cambio de enlace)
+        run: |
+          SSH="ssh -i ~/.ssh/deploy_key -o BatchMode=yes ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}"
+          $SSH "ln -sfn /var/www/releases/futuro/${{ steps.subir.outputs.version }} /var/www/futuro.comoreclamar.info && readlink -f /var/www/futuro.comoreclamar.info"
+
+      - name: Conservar solo las 5 últimas versiones
+        run: |
+          SSH="ssh -i ~/.ssh/deploy_key -o BatchMode=yes ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}"
+          $SSH "ls -1dt /var/www/releases/futuro/*/ | tail -n +6 | xargs -r rm -rf; echo 'versiones que quedan:'; ls -1dt /var/www/releases/futuro/*/ | wc -l"
+
+      - name: Comprobar que responde
+        run: |
+          sleep 3
+          for i in 1 2 3; do
+            CODIGO=$(curl -s -o /dev/null -w '%{http_code}' "${{ vars.SITE_BASEURL }}")
+            echo "Intento $i: HTTP $CODIGO"
+            [ "$CODIGO" = "200" ] && exit 0
+            sleep 5
+          done
+          echo "::error::El sitio no responde 200 tras el despliegue"
+          exit 1

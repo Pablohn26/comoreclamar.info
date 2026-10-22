@@ -2,7 +2,7 @@
   <div id="recent-posts-2" class="widget widget_recent_entries">
     <h4 class="sidebar-heading"><span>Entradas recientes</span></h4>
     <ul>
-      {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
+      {{ range first 5 (partial "paginas-validadas" .) }}
       <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>

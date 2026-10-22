@@ -9,6 +9,11 @@ summary: "Las compras online son un verdadero fenómeno desde que se asentó la 
 draft: false
 category: ["Reclamación"]
 tag: ["ropa"]
+status: validated
+validated_by: pablo
+validated_at: 2026-10-22
+review_due: 2027-05-07
+legacy: true
 ---
 <!-- wp:paragraph -->
 <p>Las <strong>compras online</strong> son un verdadero fenómeno desde que se asentó la era digital. Cada vez más personas optan por las compras a través de <strong>Internet</strong>. Esto provoca que en algunos casos en los que el servicio no hay sido el deseado el cliente se vea obligado a poner una reclamación sin ser presencial.  </p>
