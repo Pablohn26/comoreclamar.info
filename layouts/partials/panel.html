@@ -29,8 +29,8 @@
   <div class="panel-bloque">
     <h2>Pendientes</h2>
     {{- $revision := add (len $enRevision) (len $caducadas) -}}
-    <p class="panel-cifra">{{ $revision }} en revisión
-      {{- with $peticiones }} · {{ .total }} peticiones abiertas{{ else }} · peticiones: sin datos{{ end }}</p>
+    <p class="panel-cifra">{{ $revision }} {{ if eq $revision 1 }}en revisión{{ else }}en revisión{{ end }}
+      {{- with $peticiones }} · {{ .total }} {{ if eq .total 1 }}petición abierta{{ else }}peticiones abiertas{{ end }}{{ else }} · peticiones: sin datos{{ end }}</p>
     {{- if gt $revision 0 }}
       <ul class="panel-lista">
         {{- range $enRevision }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="panel-etq">en revisión</span></li>{{ end }}
