@@ -15,7 +15,7 @@ disqusShortname = ""
   staging = true
   # Receptor de formularios (Hosting Laboratorio). Cambiar a
   # https://peticiones.comoreclamar.info/ cuando el proveedor permita el dominio.
-  peticionesURL = "https://myblog-pql53j8d83.live-website.com/peticiones/"
+  peticionesURL = "https://peticiones.comoreclamar.info/"
   repoGitHub = "Pablohn26/comoreclamar.info"
 
 [taxonomies]
