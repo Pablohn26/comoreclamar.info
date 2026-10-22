@@ -54,7 +54,7 @@ jobs:
       - name: Activar la versión (cambio de enlace)
         run: |
           SSH="ssh -i ~/.ssh/deploy_key -o BatchMode=yes ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}"
-          $SSH "ln -sfn /var/www/releases/futuro/${{ steps.subir.outputs.version }} /var/www/futuro.comoreclamar.info && readlink -f /var/www/futuro.comoreclamar.info"
+          $SSH "ln -sfn /var/www/releases/futuro/${{ steps.subir.outputs.version }} /var/www/sites/futuro && readlink -f /var/www/sites/futuro"
 
       - name: Conservar solo las 5 últimas versiones
         run: |
