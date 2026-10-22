@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Prototipo · comoreclamar</title>
+<style>
+  :root{
+    --tinta:#14171a; --gris:#5b6672; --linea:#e3e7ea; --fondo:#ffffff; --suave:#f6f7f8;
+    --acento:#0b6b52; --acento-suave:#e8f3ee; --aviso:#8a5a00; --aviso-fondo:#fff6e0;
+    --radio:14px; --sombra:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--tinta);background:var(--fondo)}
+  a{color:var(--acento);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .env{max-width:760px;margin:0 auto;padding:0 18px}
+  .env-ancho{max-width:1060px;margin:0 auto;padding:0 18px}
+
+  /* Cabecera */
+  header{border-bottom:1px solid var(--linea);position:sticky;top:0;background:rgba(255,255,255,.94);
+         backdrop-filter:blur(8px);z-index:20}
+  .barra{display:flex;align-items:center;gap:14px;height:60px}
+  .marca{font-weight:700;letter-spacing:-.02em;font-size:17px;color:var(--tinta)}
+  .marca span{color:var(--acento)}
+  nav{display:flex;gap:18px;margin-left:auto;font-size:14.5px}
+  nav a{color:var(--gris)}
+  nav a.activo{color:var(--tinta);font-weight:600}
+  @media (max-width:640px){ nav{display:none} }
+
+  /* Portada */
+  .hero{padding:56px 0 28px}
+  .hero h1{font-size:clamp(28px,6vw,42px);line-height:1.12;letter-spacing:-.03em;margin:0 0 10px}
+  .hero p{color:var(--gris);margin:0 0 26px;font-size:17px;max-width:46ch}
+  .buscador{position:relative}
+  .buscador input{width:100%;font-size:17px;padding:17px 18px 17px 50px;border:1.5px solid var(--linea);
+    border-radius:var(--radio);background:var(--fondo);outline:none;transition:border-color .15s, box-shadow .15s}
+  .buscador input:focus{border-color:var(--acento);box-shadow:0 0 0 4px var(--acento-suave)}
+  .buscador svg{position:absolute;left:17px;top:50%;transform:translateY(-50%);opacity:.45}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{font-size:13.5px;padding:7px 12px;border:1px solid var(--linea);border-radius:999px;color:var(--gris);background:var(--fondo);cursor:pointer}
+  .chip:hover{border-color:#c9d0d6;color:var(--tinta)}
+
+  .seccion-titulo{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--gris);margin:38px 0 12px;font-weight:600}
+  .tarjetas{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+  .tarjeta{border:1px solid var(--linea);border-radius:var(--radio);padding:16px;background:var(--fondo)}
+  .tarjeta:hover{border-color:#c9d0d6}
+  .tarjeta b{display:block;font-size:15.5px;margin-bottom:3px}
+  .tarjeta small{color:var(--gris)}
+
+  .panel{border:1px solid var(--linea);border-radius:var(--radio);padding:16px 18px;background:var(--suave);margin-top:18px;
+         display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--gris)}
+  .panel b{color:var(--tinta)}
+
+  /* Ficha */
+  .miga{font-size:13.5px;color:var(--gris);padding:22px 0 0}
+  .ficha-cab{padding:10px 0 18px;border-bottom:1px solid var(--linea)}
+  .ficha-cab h1{font-size:clamp(26px,5.5vw,36px);letter-spacing:-.03em;margin:0 0 10px}
+  .etiquetas{display:flex;gap:7px;flex-wrap:wrap}
+  .et{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--suave);color:var(--gris);border:1px solid var(--linea)}
+  .et.pub{background:var(--acento-suave);color:var(--acento);border-color:#cfe6dd}
+
+  .pestanas{display:flex;gap:4px;margin:20px 0 26px;position:sticky;top:60px;background:var(--fondo);padding:6px 0;z-index:10}
+  .pestana{flex:1;text-align:center;padding:11px 8px;font-size:14px;border-radius:10px;border:1px solid transparent;
+           color:var(--gris);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pestana:hover{background:var(--suave)}
+  .pestana.activa{background:var(--tinta);color:#fff;font-weight:600}
+  @media (max-width:640px){ .pestana{font-size:13px;padding:10px 6px} }
+
+  h2{font-size:20px;letter-spacing:-.02em;margin:30px 0 10px}
+  h3{font-size:16px;margin:26px 0 8px}
+  p{color:#2a3138}
+  .pasos{list-style:none;padding:0;margin:16px 0;counter-reset:p}
+  .pasos li{position:relative;padding:0 0 20px 46px;counter-increment:p}
+  .pasos li::before{content:counter(p);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:50%;
+    background:var(--acento-suave);color:var(--acento);font-weight:700;font-size:14px;display:grid;place-items:center}
+  .pasos b{display:block;margin-bottom:3px}
+  .plazo{display:inline-flex;align-items:center;gap:8px;background:var(--suave);border:1px solid var(--linea);
+         border-radius:999px;padding:6px 13px;font-size:13.5px;color:var(--gris);margin:4px 0 6px}
+  .plazo b{color:var(--tinta)}
+
+  .boton{display:inline-flex;align-items:center;gap:9px;background:var(--acento);color:#fff;border:0;border-radius:11px;
+         padding:14px 20px;font-size:15.5px;font-weight:600;cursor:pointer;text-decoration:none}
+  .boton:hover{background:#095843;text-decoration:none}
+  .boton.sec{background:var(--fondo);color:var(--tinta);border:1.5px solid var(--linea)}
+  .boton.sec:hover{border-color:#c9d0d6;background:var(--suave)}
+  .acciones{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 30px}
+
+  .fuentes{font-size:13px;color:var(--gris);border-top:1px solid var(--linea);padding-top:12px;margin-top:28px}
+  .aviso{border:1.5px solid #f0d28a;background:var(--aviso-fondo);border-radius:var(--radio);padding:15px 17px;margin:18px 0;color:var(--aviso)}
+  .aviso b{display:block;margin-bottom:4px}
+
+  .derechos{display:grid;gap:8px;margin:14px 0 22px}
+  .derecho{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--linea);border-radius:11px;padding:13px 15px;cursor:pointer}
+  .derecho:hover{border-color:#c9d0d6}
+  .derecho input{margin:3px 0 0;accent-color:var(--acento);width:18px;height:18px}
+  .derecho.activo{border-color:var(--acento);background:var(--acento-suave)}
+  .derecho b{display:block;font-size:15px}
+  .derecho small{color:var(--gris)}
+
+  .escalera{list-style:none;padding:0;margin:16px 0}
+  .escalera li{border-left:3px solid var(--linea);padding:2px 0 22px 18px;position:relative}
+  .escalera li:last-child{border-left:3px solid transparent}
+  .escalera b{display:block}
+  .escalera small{color:var(--gris);display:block;margin-top:3px}
+  .escalera .ahora{border-left-color:var(--acento)}
+  .escalera .ahora b::after{content:" ← estás aquí";font-size:12px;color:var(--acento);font-weight:600}
+
+  /* Herramienta */
+  .caja{border:1px solid var(--linea);border-radius:var(--radio);padding:20px;margin:16px 0;background:var(--fondo)}
+  .campo{margin-bottom:14px}
+  .campo label{display:block;font-size:13.5px;color:var(--gris);margin-bottom:5px}
+  .campo input,.campo select,.campo textarea{width:100%;padding:11px 13px;border:1.5px solid var(--linea);border-radius:10px;
+    font:inherit;font-size:15px;outline:none;background:var(--fondo)}
+  .campo input:focus,.campo textarea:focus{border-color:var(--acento);box-shadow:0 0 0 3px var(--acento-suave)}
+  .dos{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+  @media (max-width:560px){ .dos{grid-template-columns:1fr} }
+  .documento{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.6;
+    background:var(--suave);border:1px solid var(--linea);border-radius:10px;padding:16px;max-height:340px;overflow:auto}
+  .nota{font-size:13px;color:var(--gris);margin-top:8px}
+  .lista-reclamaciones{list-style:none;padding:0;margin:0}
+  .lista-reclamaciones li{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--linea);padding:13px 0;font-size:14.5px}
+  .lista-reclamaciones li:last-child{border-bottom:0}
+  .estado{font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--suave);color:var(--gris);border:1px solid var(--linea);white-space:nowrap}
+  .estado.vence{background:var(--aviso-fondo);color:var(--aviso);border-color:#f0d28a}
+  .estado.ok{background:var(--acento-suave);color:var(--acento);border-color:#cfe6dd}
+
+  footer{border-top:1px solid var(--linea);margin-top:60px;padding:26px 0 60px;font-size:13px;color:var(--gris)}
+  .oculto{display:none!important}
+  .demo{position:fixed;bottom:10px;right:10px;background:var(--tinta);color:#fff;
+        font-size:11px;padding:5px 10px;border-radius:999px;opacity:.55;z-index:50;pointer-events:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="env-ancho barra">
+    <a class="marca" href="#/">como<span>reclamar</span>.info</a>
+    <nav>
+      <a href="#/" data-nav="home">Empresas</a>
+      <a href="#/vias" data-nav="vias">Vías</a>
+      <a href="#/herramientas" data-nav="herr">Herramientas</a>
+      <a href="#/premium" data-nav="premium">Premium</a>
+    </nav>
+  </div>
+</header>
+
+<main id="vista"></main>
+
+<footer>
+  <div class="env">
+    <p><b>Prototipo de diseño.</b> Los datos de ejemplo son de muestra y la herramienta guarda todo
+    en este navegador: nada se envía a ningún servidor.</p>
+  </div>
+</footer>
+
+<div class="demo">prototipo · datos de ejemplo</div>
+
+<script>
+/* ------------------------------------------------------------------ datos */
+const EMPRESAS = {
+  iberdrola: {
+    nombre: "Iberdrola", sector: "Energía", tipo: "Privada",
+    plazo: "1 mes",
+    pasos: [
+      ["Reclama por escrito, siempre con constancia", "Usa el formulario de su web o el correo de atención al cliente. Guarda el número de referencia o el acuse: sin eso no hay nada que reclamar después."],
+      ["Cuéntales qué pasó y qué pides", "Fecha, número de contrato o CUPS, el importe discutido y qué solución quieres (facturación correcta, baja, indemnización)."],
+      ["Espera un mes", "Es el plazo máximo legal para respuesta en servicios de energía. Si no contestan, la reclamación se entiende desestimada y puedes subir de escalón."]
+    ],
+    donde: "Formulario web · atención telefónica 900 100 230 · correo de la compañía · oficinas de atención",
+    aviso_gdpr: null,
+    dpo: "Delegado de Protección de Datos, Iberdrola S.A., Plaza Euskadi 5, 48009 Bilbao",
+    fuentes: "Protocolo de atención al cliente publicado por Iberdrola (consultado 22-10-2026) · Ley 24/2013 del Sector Eléctrico"
+  },
+  amazon: {
+    nombre: "Amazon", sector: "Comercio electrónico", tipo: "Privada", plazo: "1 mes",
+    pasos: [
+      ["Abre la reclamación desde tu cuenta", "Pedidos → problema con el pedido → «Necesito más ayuda» → chat o correo. Es la vía que más rápido responde."],
+      ["Exige la respuesta por escrito", "El chat no deja rastro útil: pide que confirmen por correo lo que te han dicho."],
+      ["Si no hay acuerdo, pide la reclamación formal", "Y si la compra fue con tarjeta, valora el contracargo ante tu banco."]
+    ],
+    donde: "Centro de ayuda de Amazon · chat · correo · reclamación formal por escrito",
+    aviso_gdpr: null,
+    dpo: "Amazon Spain Services, S.L.U., Calle Ramírez de Prado 5, 28045 Madrid",
+    fuentes: "Centro de ayuda de Amazon (consultado 22-10-2026)"
+  },
+  mercadona: {
+    nombre: "Mercadona", sector: "Comercio y distribución", tipo: "Privada", plazo: "—",
+    pasos: [
+      ["Hojas de reclamaciones en tienda", "Es obligatorio que las tengan. Pide una y quédate con la copia: es tu prueba."],
+      ["Atención al cliente", "Formulario web o teléfono 800 500 220."]
+    ],
+    donde: "Postventa y Atención al Cliente, calle Valencia 61, 46013 Valencia · formulario web",
+    aviso_gdpr: "Su aviso legal no publica una dirección postal del delegado de protección de datos ni un correo específico para ejercer derechos.",
+    dpo: null,
+    fuentes: "Aviso legal de mercadona.es (consultado 22-10-2026)"
+  }
+};
+
+const SECTORES = ["Energía","Telecomunicaciones","Comercio electrónico","Comercio y distribución","Transporte","Banca","Seguros","Juego"];
+
+const ESCALERA = [
+  ["Reclamación a la empresa", "Por escrito y con constancia. Plazo máximo de un mes.", "ahora"],
+  ["OMIC u oficina de consumo", "Si no contestan o no te convence la respuesta. Es gratuita.", ""],
+  ["Asociaciones de consumidores", "FACUA y otras entidades: asesoramiento y apoyo. FACUA · 954 903 292 · correo", ""],
+  ["Sistema Arbitral de Consumo", "Gratuito, rápido y vinculante, si la empresa está adherida.", ""],
+  ["Organismo del sector", "Energía → CNMC. Telecom → OAUT. Seguros → DGS. Aéreo → AESA. Banca → Banco de España/CNMV.", ""],
+  ["Vía judicial", "Juicio verbal hasta 2.000 € sin abogado ni procurador.", ""]
+];
+
+/* --------------------------------------------------------------- estado */
+const CLAVE_DATOS = "cr_datos", CLAVE_RECL = "cr_reclamaciones";
+const leer = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d } catch(e){ return d } };
+const guardar = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+let empresaActual = "iberdrola";
+let pestana = 1;
+let derechos = new Set(["acceso"]);
+
+/* ------------------------------------------------------------- utilidades */
+const hoy = () => new Date().toISOString().slice(0,10);
+function fechaLarga(iso){
+  if(!iso) return "";
+  const [a,m,d] = iso.split("-");
+  return `${+d} de ${["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"][+m-1]} de ${a}`;
+}
+function sumarMes(iso){
+  const d = new Date(iso + "T12:00:00"); const m = d.getMonth();
+  d.setMonth(m + 1);
+  if (d.getMonth() === (m + 1) % 12 ? false : true) {} // noop
+  return d.toISOString().slice(0,10);
+}
+function diasHasta(iso){
+  return Math.ceil((new Date(iso + "T12:00:00") - new Date()) / 86400000);
+}
+
+/* ----------------------------------------------------------------- vistas */
+function vistaPortada(){
+  const datos = leer(CLAVE_DATOS, null);
+  return `
+  <div class="env">
+    <section class="hero">
+      <h1>¿A quién tienes que reclamar?</h1>
+      <p>Busca la empresa y te decimos cómo, en qué orden y con qué texto. Si no está, la pedimos.</p>
+      <div class="buscador">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Iberdrola, Amazon, tu compañía de la luz…" autocomplete="off">
+      </div>
+      <div class="chips">${SECTORES.slice(0,6).map(s=>`<span class="chip">${s}</span>`).join("")}</div>
+    </section>
+
+    <div class="seccion-titulo">Empresas con guía</div>
+    <div class="tarjetas">
+      ${Object.entries(EMPRESAS).map(([k,e])=>`
+        <a class="tarjeta" href="#/empresa/${k}">
+          <b>${e.nombre}</b><small>${e.sector} · ${e.tipo.toLowerCase()}</small>
+        </a>`).join("")}
+    </div>
+
+    <div class="seccion-titulo">Estado del trabajo</div>
+    <div class="panel">
+      <span><b>23</b> empresas publicadas</span>
+      <span><b>4</b> en revisión</span>
+      <span><b>2</b> peticiones abiertas</span>
+    </div>
+
+    ${datos ? `<div class="panel" style="border-color:#cfe6dd;background:var(--acento-suave)">
+        <span>Tus datos están guardados en este navegador. <a href="#/herramientas">Ver herramientas</a></span>
+      </div>` : ""}
+  </div>`;
+}
+
+function vistaEmpresa(){
+  const e = EMPRESAS[empresaActual];
+  const tabs = `
+    <div class="pestanas">
+      <div class="pestana ${pestana===1?"activa":""}" data-tab="1">Reclamar a la empresa</div>
+      <div class="pestana ${pestana===2?"activa":""}" data-tab="2">Protección de datos</div>
+      <div class="pestana ${pestana===3?"activa":""}" data-tab="3">Vías legales</div>
+    </div>`;
+
+  let contenido = "";
+  if (pestana === 1) {
+    contenido = `
+      <div class="plazo">Plazo de respuesta: <b>${e.plazo}</b></div>
+      <ol class="pasos">
+        ${e.pasos.map(([t,d])=>`<li><b>${t}</b>${d}</li>`).join("")}
+      </ol>
+      <h3>Dónde reclamar</h3>
+      <p>${e.donde}</p>
+      <div class="acciones">
+        <button class="boton" data-preparar="1">Preparar mi reclamación</button>
+        <a class="boton sec" href="#/herramientas">Mis datos</a>
+      </div>
+      <div class="fuentes"><b>Fuentes:</b> ${e.fuentes}<br>Validado por una persona el 22 de octubre de 2026.</div>`;
+  }
+
+  if (pestana === 2) {
+    const derechosLista = [
+      ["acceso","Acceso","Saber qué datos tienen sobre ti"],
+      ["rectificacion","Rectificación","Corregir datos erróneos"],
+      ["supresion","Supresión","Que borren tus datos («derecho al olvido»)"],
+      ["oposicion","Oposición","Que dejen de usar tus datos para ciertos fines"],
+      ["limitacion","Limitación","Que solo los guarden, sin usarlos"],
+      ["portabilidad","Portabilidad","Llevarte tus datos a otro servicio"]
+    ];
+    contenido = `
+      ${e.aviso_gdpr ? `<div class="aviso"><b>Su aviso legal no incluye esta información</b>
+        ${e.aviso_gdpr} La guía se publica igualmente, pero tendrás que buscar el contacto del delegado por otra vía.</div>` : ""}
+      <h2>¿Qué derecho quieres ejercer?</h2>
+      <p>Marca uno o varios: la guía resalta los pasos que te tocan y la plantilla se genera solo con esos.</p>
+      <div class="derechos">
+        ${derechosLista.map(([k,t,s])=>`
+          <label class="derecho ${derechos.has(k)?"activo":""}">
+            <input type="checkbox" data-derecho="${k}" ${derechos.has(k)?"checked":""}>
+            <span><b>${t}</b><small>${s}</small></span>
+          </label>`).join("")}
+      </div>
+      <h3>Los pasos, siempre los mismos</h3>
+      <ol class="pasos">
+        <li><b>Identifícate</b>Aporta nombre, DNI y una dirección o correo donde contestarte.</li>
+        <li><b>Dirígete al delegado de protección de datos</b>${e.dpo ? e.dpo : "Busca el contacto del DPO en su web: no está en el aviso legal."}</li>
+        <li><b>Di qué derecho ejerces y por qué</b>Concreto y por escrito. La plantilla ya lo redacta.</li>
+        <li><b>Espera un mes</b>Ampliable a dos en casos complejos. Si no contestan o te dicen que no, reclamación ante la <b>AEPD</b>.</li>
+      </ol>
+      <div class="acciones">
+        <button class="boton" data-preparar="2">Preparar mi solicitud</button>
+      </div>
+      <div class="fuentes"><b>Fuentes:</b> ${e.fuentes} · Reglamento (UE) 2016/679, art. 12-15<br>Generado a partir del aviso legal y revisado el 22-10-2026.</div>`;
+  }
+
+  if (pestana === 3) {
+    contenido = `
+      <h2>Si no te contestan o no hay acuerdo</h2>
+      <p>Este es el orden. No hace falta agotar cada paso para pasar al siguiente, pero sí tener constancia del anterior.</p>
+      <ul class="escalera">
+        ${ESCALERA.map(([t,d,c])=>`<li class="${c}"><b>${t}</b><small>${d}</small></li>`).join("")}
+      </ul>
+      <div class="acciones"><a class="boton sec" href="#/vias">Ver la guía completa de vías</a></div>`;
+  }
+
+  return `
+  <div class="env">
+    <div class="miga"><a href="#/">Empresas</a> · ${e.sector}</div>
+    <div class="ficha-cab">
+      <h1>Reclamar a ${e.nombre}</h1>
+      <div class="etiquetas">
+        <span class="et">${e.sector}</span>
+        <span class="et ${e.tipo==="Privada"?"":"pub"}">${e.tipo}</span>
+      </div>
+    </div>
+    ${tabs}
+    ${contenido}
+  </div>`;
+}
+
+function vistaVias(){
+  return `
+  <div class="env">
+    <div class="miga"><a href="#/">Inicio</a></div>
+    <h1 style="letter-spacing:-.03em">Las vías para reclamar</h1>
+    <p style="color:var(--gris);max-width:60ch">Siempre se empieza por la empresa. Lo que viene después depende de quién sea y de cuánto te hayan fallado.</p>
+    <h2>1 · Vía extrajudicial</h2>
+    <ul class="escalera">
+      ${ESCALERA.slice(0,5).map(([t,d])=>`<li><b>${t}</b><small>${d}</small></li>`).join("")}
+    </ul>
+    <h2>2 · Vía judicial</h2>
+    <ul class="escalera">
+      <li><b>Juicio verbal (hasta 2.000 €)</b><small>Sin abogado ni procurador. Se presenta una demanda sencilla en el juzgado de tu domicilio.</small></li>
+      <li><b>Juicio ordinario (más de 2.000 €)</b><small>Con abogado y procurador.</small></li>
+    </ul>
+  </div>`;
+}
+
+function vistaHerramientas(){
+  const d = leer(CLAVE_DATOS, {});
+  const rec = leer(CLAVE_RECL, []);
+  return `
+  <div class="env">
+    <div class="miga"><a href="#/">Inicio</a></div>
+    <h1 style="letter-spacing:-.03em">Herramientas</h1>
+    <p style="color:var(--gris)">Todo lo que escribas aquí se queda en este navegador. No hay cuenta ni contraseña.</p>
+
+    <h2>Mis datos</h2>
+    <div class="caja">
+      <div class="dos">
+        <div class="campo"><label>Nombre y apellidos</label><input id="d_nombre" value="${d.nombre||""}" placeholder="Como aparece en tu DNI"></div>
+        <div class="campo"><label>DNI / NIE</label><input id="d_dni" value="${d.dni||""}" placeholder="12345678Z"></div>
+      </div>
+      <div class="campo"><label>Dirección</label><input id="d_dir" value="${d.dir||""}" placeholder="Calle, número, CP y ciudad"></div>
+      <div class="dos">
+        <div class="campo"><label>Correo electrónico</label><input id="d_email" value="${d.email||""}" placeholder="tucorreo@ejemplo.com"></div>
+        <div class="campo"><label>Teléfono</label><input id="d_tel" value="${d.tel||""}" placeholder="600 000 000"></div>
+      </div>
+      <div class="acciones" style="margin-bottom:0">
+        <button class="boton" id="guardar-datos">Guardar en este navegador</button>
+        <button class="boton sec" id="exportar">Exportar</button>
+        <button class="boton sec" id="importar">Importar</button>
+        <button class="boton sec" id="borrar" style="color:#a33;border-color:#f0cfcf">Borrar todo</button>
+      </div>
+      <p class="nota" id="estado-datos">${Object.keys(d).length ? "Guardados en este navegador." : "Aún no has guardado nada."}</p>
+    </div>
+
+    <h2>Mis reclamaciones</h2>
+    ${rec.length ? `<div class="caja"><ul class="lista-reclamaciones">
+      ${rec.map((r,i)=>{
+        const restan = diasHasta(r.vence);
+        const cls = r.estado==="resuelta" ? "ok" : (restan < 0 ? "vence" : "");
+        const txt = r.estado==="resuelta" ? "resuelta" : (restan < 0 ? `vencida hace ${-restan} días` : `quedan ${restan} días`);
+        return `<li><span style="flex:1"><b>${r.empresa}</b><br><small style="color:var(--gris)">Enviada el ${fechaLarga(r.enviada)}</small></span>
+          <span class="estado ${cls}">${txt}</span>
+          <button class="boton sec" style="padding:7px 12px;font-size:13px" data-resolver="${i}">Resolver</button></li>`;
+      }).join("")}
+    </ul></div>` : `<div class="caja"><p style="margin:0;color:var(--gris)">Todavía no has registrado ninguna.</p></div>`}
+  </div>`;
+}
+
+/* ------------------------------------------------------------- documento */
+function generarDocumento(tipo){
+  const d = leer(CLAVE_DATOS, {});
+  const e = EMPRESAS[empresaActual];
+  const quien = [
+    d.nombre || "[TU NOMBRE Y APELLIDOS]",
+    d.dni ? "con DNI " + d.dni : "[DNI]",
+    d.dir ? "con domicilio en " + d.dir : "[DOMICILIO]",
+    d.email ? "y correo electrónico " + d.email : ""
+  ].filter(Boolean).join(", ");
+
+  if (tipo === 2) {
+    const nombres = {acceso:"acceso",rectificacion:"rectificación",supresion:"supresión",oposicion:"oposición",limitacion:"limitación",portabilidad:"portabilidad"};
+    const lista = [...derechos].map(k=>nombres[k]);
+    return `A la atención del Delegado de Protección de Datos de ${e.nombre}
+
+${quien}, por medio del presente escrito y al amparo de lo dispuesto en el Reglamento (UE) 2016/679 (RGPD) y en la Ley Orgánica 3/2018 (LOPDGDD), EJERZO el derecho de ${lista.join(", ")}.
+
+Le solicito que, en el plazo máximo de un mes, ${lista.length>1?"atiendan los derechos indicados":"atienda el derecho indicado"} y me informen de las medidas adoptadas.
+
+En caso de no recibir respuesta en plazo, o si esta no es satisfactoria, presentaré la correspondiente reclamación ante la Agencia Española de Protección de Datos.
+
+${d.dir ? d.dir + "\n" : ""}${d.nombre || "[NOMBRE]"}
+${d.dni || "[DNI]"}
+Fecha: ${fechaLarga(hoy())}`;
+  }
+
+  return `A la atención del Servicio de Atención al Cliente de ${e.nombre}
+
+${quien}, EXPONGO:
+
+Que soy cliente de ${e.nombre} y que he detectado el siguiente problema:
+
+[DESCRIBE AQUÍ QUÉ PASÓ, CON FECHAS E IMPORTES]
+
+Por lo expuesto, SOLICITO:
+
+[QUÉ SOLUCIÓN PIDES]
+
+Les recuerdo que el plazo máximo de respuesta es de ${e.plazo} y que, transcurrido el mismo sin contestación, podré acudir a la oficina de consumo o al organismo competente.
+
+${d.dir ? d.dir + "\n" : ""}${d.nombre || "[NOMBRE]"}
+${d.dni || "[DNI]"}
+Fecha: ${fechaLarga(hoy())}`;
+}
+
+/* ----------------------------------------------------------------- rutas */
+function pintar(){
+  const hash = location.hash.replace("#/", "") || "";
+  const [ruta, arg, sub] = hash.split("/");
+  let html = "";
+
+  if (ruta === "empresa" && EMPRESAS[arg]) { empresaActual = arg; if (sub) pestana = +sub; html = vistaEmpresa(); }
+  else if (ruta === "vias") html = vistaVias();
+  else if (ruta === "herramientas") html = vistaHerramientas();
+  else if (ruta === "premium") html = `<div class="env"><h1>Premium</h1><p style="color:var(--gris)">Tu propio buzón de reclamaciones, con gestión asistida.</p></div>`;
+  else html = vistaPortada();
+
+  document.getElementById("vista").innerHTML = html;
+  window.scrollTo(0,0);
+  enlazar();
+
+  // ?doc=1 genera la plantilla directamente (útil para capturas y enlaces)
+  const params = new URLSearchParams(location.search);
+  if (params.get("doc") && ruta === "empresa") {
+    setTimeout(() => mostrarDocumento(params.get("doc") === "2" ? 2 : 1), 250);
+  }
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("activo"));
+  const navMap = {"":"home","vias":"vias","herramientas":"herr","premium":"premium"};
+  const n = document.querySelector(`nav a[data-nav="${navMap[ruta]||""}"]`);
+  if (n) n.classList.add("activo");
+}
+
+function enlazar(){
+  document.querySelectorAll(".pestana").forEach(p=>{
+    p.onclick = () => { pestana = +p.dataset.tab; pintar(); };
+  });
+
+  document.querySelectorAll("[data-derecho]").forEach(c=>{
+    c.onchange = () => {
+      const k = c.dataset.derecho;
+      c.checked ? derechos.add(k) : derechos.delete(k);
+      pintar();
+    };
+  });
+
+  document.querySelectorAll("[data-preparar]").forEach(b=>{
+    b.onclick = () => mostrarDocumento(+b.dataset.preparar);
+  });
+
+  const g = document.getElementById("guardar-datos");
+  if (g) {
+    g.onclick = () => {
+      guardar(CLAVE_DATOS, {
+        nombre: val("d_nombre"), dni: val("d_dni"), dir: val("d_dir"),
+        email: val("d_email"), tel: val("d_tel")
+      });
+      document.getElementById("estado-datos").textContent = "Guardados en este navegador.";
+    };
+  }
+
+  const ex = document.getElementById("exportar");
+  if (ex) ex.onclick = () => {
+    const blob = new Blob([JSON.stringify({datos: leer(CLAVE_DATOS,{}), reclamaciones: leer(CLAVE_RECL,[])}, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "comoreclamar-mis-datos.json"; a.click();
+  };
+
+  const im = document.getElementById("importar");
+  if (im) im.onclick = () => {
+    const inp = document.createElement("input"); inp.type = "file"; inp.accept = ".json";
+    inp.onchange = () => {
+      const f = inp.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = () => { try {
+        const o = JSON.parse(fr.result);
+        if (o.datos) guardar(CLAVE_DATOS, o.datos);
+        if (o.reclamaciones) guardar(CLAVE_RECL, o.reclamaciones);
+        pintar();
+      } catch(e){ alert("Ese fichero no es válido."); } };
+      fr.readAsText(f);
+    };
+    inp.click();
+  };
+
+  const bo = document.getElementById("borrar");
+  if (bo) bo.onclick = () => {
+    if (confirm("¿Borrar tus datos y tus reclamaciones de este navegador?")) {
+      localStorage.removeItem(CLAVE_DATOS); localStorage.removeItem(CLAVE_RECL); pintar();
+    }
+  };
+
+  document.querySelectorAll("[data-resolver]").forEach(b=>{
+    b.onclick = () => {
+      const r = leer(CLAVE_RECL, []);
+      r[+b.dataset.resolver].estado = "resuelta";
+      guardar(CLAVE_RECL, r); pintar();
+    };
+  });
+}
+
+const val = id => (document.getElementById(id)?.value || "").trim();
+
+function mostrarDocumento(tipo){
+  const texto = generarDocumento(tipo);
+  const v = document.getElementById("vista");
+  const caja = document.createElement("div");
+  caja.className = "caja";
+  caja.id = "caja-doc";
+  caja.innerHTML = `
+    <h2 style="margin-top:0">${tipo===2?"Tu solicitud":"Tu reclamación"}</h2>
+    <p class="nota" style="margin-bottom:12px">Generada en tu navegador con los datos guardados. Revísala antes de enviarla.</p>
+    <div class="documento">${texto.replace(/</g,"&lt;")}</div>
+    <div class="acciones" style="margin-bottom:0">
+      <button class="boton" id="descargar">Descargar</button>
+      <button class="boton sec" id="copiar">Copiar</button>
+      <button class="boton sec" id="registrar">Marcar como enviada hoy</button>
+    </div>`;
+  const envoltorio = document.createElement("div");
+  envoltorio.className = "env";
+  envoltorio.appendChild(caja);
+  v.prepend(envoltorio);
+  caja.scrollIntoView({behavior:"smooth", block:"start"});
+
+  document.getElementById("descargar").onclick = () => {
+    const blob = new Blob([texto], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `reclamacion-${EMPRESAS[empresaActual].nombre.toLowerCase()}.txt`;
+    a.click();
+  };
+  document.getElementById("copiar").onclick = async () => {
+    await navigator.clipboard.writeText(texto);
+    document.getElementById("copiar").textContent = "Copiado";
+  };
+  document.getElementById("registrar").onclick = () => {
+    const rec = leer(CLAVE_RECL, []);
+    const enviada = hoy();
+    rec.unshift({ empresa: EMPRESAS[empresaActual].nombre, enviada, vence: sumarMes(enviada), estado: "pendiente" });
+    guardar(CLAVE_RECL, rec);
+    location.hash = "#/herramientas";
+  };
+}
+
+/* datos de demostración para capturas */
+if (location.search.includes("demo") && !localStorage.getItem(CLAVE_DATOS)) {
+  guardar(CLAVE_DATOS, {nombre:"Lucía Ferrer Ruiz", dni:"12345678Z", dir:"Calle Mayor 14, 3º B, 28013 Madrid",
+                        email:"lucia.ferrer@ejemplo.com", tel:"600 123 456"});
+  guardar(CLAVE_RECL, [
+    {empresa:"Iberdrola", enviada:"2026-10-01", vence:"2026-11-01", estado:"pendiente"},
+    {empresa:"Amazon", enviada:"2026-09-12", vence:"2026-10-12", estado:"pendiente"}
+  ]);
+}
+
+/* búsqueda */
+document.addEventListener("input", ev=>{
+  if (ev.target.id === "q") {
+    const q = ev.target.value.toLowerCase().trim();
+    const lista = document.querySelector(".tarjetas");
+    if (!lista) return;
+    const hits = Object.entries(EMPRESAS).filter(([k,e])=> e.nombre.toLowerCase().includes(q) || e.sector.toLowerCase().includes(q));
+    lista.innerHTML = hits.map(([k,e])=>`<a class="tarjeta" href="#/empresa/${k}"><b>${e.nombre}</b><small>${e.sector} · ${e.tipo.toLowerCase()}</small></a>`).join("")
+      || `<div class="tarjeta"><b>No hay guía todavía</b><small>Pídela y la preparamos.</small></div>`;
+  }
+});
+
+window.addEventListener("hashchange", pintar);
+pintar();
+</script>
+</body>
+</html>
