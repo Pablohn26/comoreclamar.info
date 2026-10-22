@@ -50,3 +50,7 @@ disqusShortname = ""
 [logging]
   ignoreLogs = ["warning-goldmark-raw-html"]
 
+[[menu.main]]
+  name = "Curso de transparencia"
+  url = "/curso-transparencia-civio/"
+  weight = 40
