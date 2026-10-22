@@ -1,0 +1,166 @@
+{{ define "main" }}
+<article class="post type-page">
+  <h1 class="entry-title">{{ .Title }}</h1>
+  <div class="entry-content">
+    {{ .Content }}
+
+    <div class="peticiones">
+
+      {{/* ---------- Pedir un artículo ---------- */}}
+      <section class="peticion-bloque">
+        <h2>Pedir un artículo</h2>
+        <p>Dinos a qué empresa o administración quieres reclamar y qué trámite necesitas.
+           Si dejas tu correo, te avisamos cuando el artículo esté publicado.</p>
+
+        <form class="form-peticion" data-tipo="solicitud" novalidate>
+          <p>
+            <label for="empresa">Empresa o administración <span aria-hidden="true">*</span></label>
+            <input type="text" id="empresa" name="referencia" required maxlength="120"
+                   placeholder="Iberdrola, Amazon, tu ayuntamiento…">
+          </p>
+          <p>
+            <label for="peticion-texto">¿Qué quieres que expliquemos? <span aria-hidden="true">*</span></label>
+            <textarea id="peticion-texto" name="texto" rows="5" required minlength="10" maxlength="2000"
+                      placeholder="Cómo reclamar una factura duplicada de la luz"></textarea>
+          </p>
+          <p>
+            <label for="peticion-email">Tu correo (opcional, no se publica)</label>
+            <input type="email" id="peticion-email" name="email" maxlength="180"
+                   placeholder="tucorreo@ejemplo.com">
+          </p>
+          {{/* campo trampa: los bots lo rellenan, las personas no lo ven */}}
+          <p class="trampa" aria-hidden="true">
+            <label for="peticion-web">No rellenar</label>
+            <input type="text" id="peticion-web" name="web" tabindex="-1" autocomplete="off">
+          </p>
+          <p><button type="submit">Enviar petición</button></p>
+          <p class="resultado" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      {{/* ---------- Avisar de algo desactualizado ---------- */}}
+      <section class="peticion-bloque">
+        <h2>Avisar de algo desactualizado</h2>
+        <p>Si un artículo tiene un teléfono, un plazo o un enlace que ya no vale, dínoslo.
+           Si tienes la fuente oficial, pégala: nos ahorra la comprobación.</p>
+
+        <form class="form-peticion" data-tipo="validar" novalidate>
+          <p>
+            <label for="validar-pagina">Página del artículo <span aria-hidden="true">*</span></label>
+            <input type="url" id="validar-pagina" name="referencia" required maxlength="300"
+                   placeholder="https://comoreclamar.info/como-reclamar-a-iberdrola/">
+          </p>
+          <p>
+            <label for="validar-texto">¿Qué ha cambiado? <span aria-hidden="true">*</span></label>
+            <textarea id="validar-texto" name="texto" rows="5" required minlength="10" maxlength="2000"
+                      placeholder="El teléfono de atención ahora es otro, según https://…"></textarea>
+          </p>
+          <p>
+            <label for="validar-email">Tu correo (opcional, no se publica)</label>
+            <input type="email" id="validar-email" name="email" maxlength="180"
+                   placeholder="tucorreo@ejemplo.com">
+          </p>
+          <p class="trampa" aria-hidden="true">
+            <label for="validar-web">No rellenar</label>
+            <input type="text" id="validar-web" name="web" tabindex="-1" autocomplete="off">
+          </p>
+          <p><button type="submit">Enviar aviso</button></p>
+          <p class="resultado" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <p class="peticiones-pie">
+        Todas las peticiones quedan registradas en
+        <a href="https://github.com/{{ site.Params.repoGitHub }}/issues" rel="noopener">la lista pública de issues</a>,
+        sin datos personales.
+      </p>
+    </div>
+  </div>
+</article>
+
+<style>
+  .peticiones { margin-top: 2rem; }
+  .peticion-bloque { margin-bottom: 2.5rem; }
+  .form-peticion p { margin-bottom: 1rem; }
+  .form-peticion label { display: block; font-weight: 600; margin-bottom: .3rem; }
+  .form-peticion input[type=text],
+  .form-peticion input[type=email],
+  .form-peticion input[type=url],
+  .form-peticion textarea {
+    width: 100%; max-width: 34rem; padding: .55rem .7rem;
+    border: 1px solid #ccc; border-radius: 4px; font: inherit; box-sizing: border-box;
+  }
+  .form-peticion textarea { resize: vertical; }
+  .form-peticion button {
+    padding: .6rem 1.2rem; border: 0; border-radius: 4px; cursor: pointer;
+    font: inherit; background: #2c6cb0; color: #fff;
+  }
+  .form-peticion button[disabled] { opacity: .6; cursor: default; }
+  .form-peticion .trampa { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+  .form-peticion .resultado { min-height: 1.4em; margin-top: .6rem; }
+  .form-peticion .resultado.ok { color: #1b6b2f; }
+  .form-peticion .resultado.error { color: #a3231b; }
+  .peticiones-pie { font-size: .92em; color: #555; }
+</style>
+
+<script>
+(function () {
+  const ENDPOINT = {{ site.Params.peticionesURL | jsonify }};
+
+  document.querySelectorAll('.form-peticion').forEach(function (form) {
+    const boton = form.querySelector('button[type=submit]');
+    const salida = form.querySelector('.resultado');
+
+    form.addEventListener('submit', async function (evento) {
+      evento.preventDefault();
+      salida.className = 'resultado';
+      salida.textContent = '';
+
+      const datos = {
+        tipo: form.dataset.tipo,
+        referencia: form.querySelector('[name=referencia]').value.trim(),
+        texto: form.querySelector('[name=texto]').value.trim(),
+        email: (form.querySelector('[name=email]').value || '').trim(),
+        web: form.querySelector('[name=web]').value
+      };
+
+      if (datos.referencia.length < 2) {
+        salida.classList.add('error');
+        salida.textContent = 'Falta el dato principal.';
+        return;
+      }
+      if (datos.texto.length < 10) {
+        salida.classList.add('error');
+        salida.textContent = 'Cuéntanos un poco más (al menos 10 caracteres).';
+        return;
+      }
+
+      boton.disabled = true;
+      boton.textContent = 'Enviando…';
+      try {
+        const respuesta = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        const cuerpo = await respuesta.json().catch(() => ({}));
+        if (respuesta.ok && cuerpo.ok) {
+          salida.classList.add('ok');
+          salida.textContent = cuerpo.mensaje || 'Enviado. Gracias.';
+          form.reset();
+        } else {
+          salida.classList.add('error');
+          salida.textContent = cuerpo.error || 'No se pudo enviar. Inténtalo más tarde.';
+        }
+      } catch (error) {
+        salida.classList.add('error');
+        salida.textContent = 'No hay conexión con el servidor. Inténtalo más tarde.';
+      } finally {
+        boton.disabled = false;
+        boton.textContent = form.dataset.tipo === 'validar' ? 'Enviar aviso' : 'Enviar petición';
+      }
+    });
+  });
+})();
+</script>
+{{ end }}

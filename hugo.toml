@@ -13,6 +13,10 @@ disqusShortname = ""
   # true = preproducción: no se indexa (robots + noindex).
   # Al pasar al dominio principal, poner false.
   staging = true
+  # Receptor de formularios (Hosting Laboratorio). Cambiar a
+  # https://peticiones.comoreclamar.info/ cuando el proveedor permita el dominio.
+  peticionesURL = "https://myblog-pql53j8d83.live-website.com/peticiones/"
+  repoGitHub = "Pablohn26/comoreclamar.info"
 
 [taxonomies]
   category = "category"
