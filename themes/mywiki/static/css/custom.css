@@ -1,0 +1,18 @@
+/* Ajustes propios de la réplica en Hugo */
+.entry-tags { margin: 1.2em 0; font-size: .95em; }
+.entry-tags a { color: #048eb0; text-decoration: none; }
+.entry-tags a:hover { text-decoration: underline; }
+.entry-meta { color: #666; font-size: .9em; margin: .4em 0 1.4em; }
+.entry-title { margin-bottom: .2em; }
+.post-navigation { clear: both; margin: 2em 0; padding-top: 1em; border-top: 1px solid #cfcfcf; overflow: hidden; }
+.post-navigation .prev { float: left; max-width: 45%; }
+.post-navigation .next { float: right; max-width: 45%; text-align: right; }
+.pagination { text-align: center; margin: 2em 0; }
+.pagination a, .pagination span { margin: 0 .25em; color: #048eb0; }
+.pagination .current { font-weight: bold; color: #333; }
+.suggestionsbox { position: absolute; z-index: 100; background: #fff; border: 1px solid #cfcfcf; width: 100%; }
+.suggestionsbox .suggestion { padding: .4em .8em; border-bottom: 1px solid #eee; }
+.suggestionsbox .suggestion a { color: #048eb0; }
+#suggest { position: relative; }
+.widget { margin-bottom: 2em; }
+.tagcloud a { margin: 0 .3em .3em 0; line-height: 1.6; }

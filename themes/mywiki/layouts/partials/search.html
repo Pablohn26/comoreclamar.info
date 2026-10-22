@@ -1,0 +1,17 @@
+<div class="searchwrap">
+  <div class="container" id="search-main">
+    <div class="row">
+      <form class="asholder search-main col-md-12 col-sm-12 col-xs-12" role="search" method="get" id="searchformtop" action="{{ "/" | relURL }}">
+        <div class="input-group" id="suggest">
+          <input name="s" id="s" type="text" class="search-query form-control pull-right" autocomplete="off"
+                 placeholder="¿tienes una pregunta? Escribe aquí y presiona enter.">
+          <div class="suggestionsbox" id="suggestions" style="display: none;">
+            <img src="{{ "img/arrow1.png" | relURL }}" height="18" width="27" class="upArrow" alt="upArrow">
+            <div class="suggestionlist" id="suggestionslist"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{{ "js/mysearch.js" | relURL }}" defer></script>

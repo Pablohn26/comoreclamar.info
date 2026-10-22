@@ -1,0 +1,43 @@
+baseURL = "https://comoreclamar.info/"
+locale = "es-ES"
+title = "CómoReclamar.info"
+theme = "mywiki"
+paginate = 10
+enableRobotsTXT = true
+disqusShortname = ""
+
+[params]
+  description = "El que no reclama es porque no quiere."
+
+[taxonomies]
+  category = "category"
+  tag = "tag"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = true
+
+[[menu.main]]
+  name = "Organizaciones"
+  url = "/organizaciones/"
+  weight = 1
+[[menu.main]]
+  name = "¿Cómo colaborar?"
+  url = "/como-colaborar/"
+  weight = 2
+[[menu.main]]
+  name = "No sé cómo reclamar a…"
+  url = "/no-se-como-reclamar-a/"
+  weight = 3
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[logging]
+  ignoreLogs = ["warning-goldmark-raw-html"]
+

@@ -1,0 +1,24 @@
+<div id="sidebar1" class="fluid-sidebar sidebar col-sm-4 border-left margin-bottom" role="complementary">
+  <div id="recent-posts-2" class="widget widget_recent_entries">
+    <h4 class="sidebar-heading"><span>Entradas recientes</span></h4>
+    <ul>
+      {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+  <div id="tag_cloud-2" class="widget widget_tag_cloud">
+    <h4 class="sidebar-heading"><span>Nube de etiquetas</span></h4>
+    <div class="tagcloud">
+      {{ $taxo := .Site.Taxonomies.tags }}
+      {{ $max := 1 }}
+      {{ range $taxo }}{{ if gt .Count $max }}{{ $max = .Count }}{{ end }}{{ end }}
+      {{ range $name, $tag := $taxo }}
+        {{ $peso := 1.0 }}
+        {{ if gt $max 1 }}{{ $peso = div (add (mul 14.0 (sub $tag.Count 1)) 0.0) (sub $max 1) }}{{ end }}
+        {{ $tam := add 8 (int $peso) }}
+        <a href="{{ "/tag/" | relURL }}{{ $name | urlize }}/" class="tag-cloud-link" style="font-size: {{ $tam }}pt;">{{ $name }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>

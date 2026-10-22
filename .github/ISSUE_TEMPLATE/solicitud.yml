@@ -1,0 +1,43 @@
+name: Pedir un artículo
+description: Pide que expliquemos cómo reclamar algo a una empresa o administración
+title: "[Solicitud] "
+labels: ["solicitud"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Este issue es **público**. No escribas aquí tu correo ni datos personales:
+        si quieres que te avisemos cuando el artículo esté publicado, usa el
+        formulario de la web (https://comoreclamar.info/contacto/), que no publica nada.
+  - type: input
+    id: empresa
+    attributes:
+      label: Empresa o administración
+      description: A quién quieres reclamar
+      placeholder: Iberdrola, Amazon, tu ayuntamiento…
+    validations:
+      required: true
+  - type: textarea
+    id: peticion
+    attributes:
+      label: ¿Qué quieres que expliquemos?
+      description: Cuanto más concreto, mejor
+      placeholder: Cómo reclamar una factura duplicada de la luz
+    validations:
+      required: true
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto (opcional)
+      description: Qué has intentado, qué te han contestado, plazos que te han dado
+    validations:
+      required: false
+  - type: checkboxes
+    id: comprobaciones
+    attributes:
+      label: Antes de enviar
+      options:
+        - label: He buscado si ya existe un artículo sobre esto
+          required: false
+        - label: Entiendo que este issue es público
+          required: true

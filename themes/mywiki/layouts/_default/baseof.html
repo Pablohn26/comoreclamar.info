@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="pingback" href="{{ "xmlrpc.php" | absURL }}">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Cabin">
+<link rel="stylesheet" href="{{ "css/bootstrap.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/font-awesome.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+{{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
+{{ range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">{{ end }}
+</head>
+<body class="{{ if .IsHome }}home blog{{ else if eq .Kind "page" }}single{{ else }}archive{{ end }}">
+<div id="wrap">
+{{ partial "header.html" . }}
+{{ partial "search.html" . }}
+<div class="container" id="maincnot">
+  <div id="content" class="row clearfix">
+    <div id="main" class="col-sm-8 clearfix">
+      {{ block "main" . }}{{ end }}
+    </div>
+    {{ partial "sidebar.html" . }}
+  </div>
+</div>
+{{ partial "footer.html" . }}
+</div>
+<script src="{{ "js/jquery.min.js" | relURL }}"></script>
+<script src="{{ "js/bootstrap.js" | relURL }}"></script>
+<script src="{{ "js/general.js" | relURL }}"></script>
+</body>
+</html>

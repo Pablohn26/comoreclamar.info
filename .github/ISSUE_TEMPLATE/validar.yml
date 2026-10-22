@@ -1,0 +1,43 @@
+name: Avisar de contenido desactualizado
+description: Un artículo tiene un dato que ya no es correcto (teléfono, plazo, enlace)
+title: "[Validar] "
+labels: ["validar"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por avisar. Este issue es **público**: no incluyas datos personales.
+  - type: input
+    id: pagina
+    attributes:
+      label: Página del artículo
+      description: La dirección completa del artículo
+      placeholder: https://comoreclamar.info/como-reclamar-a-iberdrola/
+    validations:
+      required: true
+  - type: dropdown
+    id: estado
+    attributes:
+      label: ¿Qué le pasa?
+      options:
+        - El dato ya no es correcto (teléfono, dirección, plazo)
+        - El enlace o formulario oficial ya no existe
+        - El procedimiento ha cambiado
+        - Falta información importante
+    validations:
+      required: true
+  - type: textarea
+    id: detalle
+    attributes:
+      label: ¿Qué es lo correcto ahora?
+      description: "Si tienes la fuente oficial, pégala — nos ahorra la comprobación"
+      placeholder: "El teléfono de atención ahora es 900 000 000, según https://…"
+    validations:
+      required: true
+  - type: checkboxes
+    id: comprobaciones
+    attributes:
+      label: Antes de enviar
+      options:
+        - label: Entiendo que este issue es público
+          required: true

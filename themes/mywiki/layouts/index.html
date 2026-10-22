@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div id="home-main" class="home-main home">
+  {{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
+  {{ range $pag.Pages }}{{ partial "entrada.html" . }}{{ end }}
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}

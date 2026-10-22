@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="post type-post">
+  <h1 class="entry-title">{{ .Title }}</h1>
+  <div class="entry-meta">
+    <span class="posted-on">{{ .Date.Format "2 January 2006" }}</span>
+    {{ with .Params.categories }}<span class="cat-links"> · {{ delimit . ", " }}</span>{{ end }}
+    {{ with .Params.author }}<span class="byline"> · por {{ . }}</span>{{ end }}
+  </div>
+  <div class="entry-content">
+    {{ .Content }}
+  </div>
+  {{ with .Params.tags }}
+  <div class="entry-tags">Etiquetas: {{ range . }}<a href="{{ "/tag/" | relURL }}{{ . | urlize }}/">{{ . }}</a> {{ end }}</div>
+  {{ end }}
+</article>
+<nav class="post-navigation">
+  {{ with .PrevInSection }}<a class="prev" href="{{ .RelPermalink }}">&laquo; {{ .Title }}</a>{{ end }}
+  {{ with .NextInSection }}<a class="next" href="{{ .RelPermalink }}">{{ .Title }} &raquo;</a>{{ end }}
+</nav>
+{{ end }}

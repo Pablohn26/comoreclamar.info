@@ -1,0 +1,23 @@
+{{ $page := . }}
+{{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
+{{ range $pag.Pages }}
+<article id="post-{{ .File.UniqueID | truncate 6 "" }}" class="clearfix post type-post status-publish format-standard hentry" role="article">
+  <header>
+    <div class="cat-hadding">
+      <a href="{{ .RelPermalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a>
+    </div>
+    <p class="meta post-meta-entry">
+      <i class="fa fa-calendar-check-o"></i>&nbsp;&nbsp;
+      <a href="{{ .RelPermalink }}" title="{{ .Date.Format "15:04" }}"><time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "02/01/2006" }}</time></a>
+      &nbsp;
+      {{ with .Params.categories }}<i class="fa fa-folder-open"></i>
+      <a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}/" rel="category tag">{{ index . 0 }}</a>{{ end }}
+    </p>
+  </header>
+  <section class="post_content">
+    <p>{{ .Summary | plainify | truncate 340 }}</p>
+    <div class="clear-fix"></div>
+    <p><a href="{{ .RelPermalink }}" title="Leer más...">Leer más</a></p>
+  </section>
+</article>
+{{ end }}

@@ -1,0 +1,13 @@
+# Ficheros generados por Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# Basura del sistema
+.DS_Store
+Thumbs.db
+*.swp
+
+# Entornos locales / secretos
+.env
+.env.*
