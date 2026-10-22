@@ -5,6 +5,12 @@ name: Construir y desplegar
 on:
   push:
     branches: [main]
+  # El panel de la portada muestra las peticiones abiertas: se reconstruye solo
+  # cuando alguien abre, cierra o etiqueta un issue.
+  issues:
+    types: [opened, closed, reopened, labeled, unlabeled]
+  schedule:
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -13,6 +19,7 @@ concurrency:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   desplegar:
@@ -27,6 +34,11 @@ jobs:
         with:
           hugo-version: '0.168.0'
           extended: true
+
+      - name: Recoger peticiones abiertas
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 bin/recoger-peticiones.py
 
       - name: Construir (solo contenido validado)
         run: |

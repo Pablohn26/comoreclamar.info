@@ -1,0 +1,82 @@
+{{/*
+  Panel de estado del sitio: qué se publicó últimamente, qué está en cola de
+  revisión y qué ha pedido la gente. Todo se resuelve en el build: el contenido
+  sale del frontmatter y las peticiones de un JSON que genera bin/recoger-peticiones.py.
+*/}}
+{{- $validadas := partial "paginas-validadas" . -}}
+{{- $ultima := first 1 (sort $validadas "Date" "desc") -}}
+{{- $enRevision := where $validadas "Params.status" "review" -}}
+{{- $caducadas := where $validadas "Params.status" "stale" -}}
+{{- $peticiones := site.Data.peticiones -}}
+
+<section class="panel-estado" aria-label="Estado del sitio">
+
+  <div class="panel-bloque">
+    <h2>Último artículo</h2>
+    {{- with $ultima }}
+      {{- range . }}
+      <p class="panel-destacado"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+      <p class="panel-meta">
+        Publicado el {{ .Date.Format "2 de enero de 2006" }}
+        {{- with .Params.validated_at }} · revisado el {{ (time .).Format "2 de enero de 2006" }}{{ end }}
+      </p>
+      {{- end }}
+    {{- else }}
+      <p class="panel-meta">Todavía no hay artículos validados.</p>
+    {{- end }}
+  </div>
+
+  <div class="panel-bloque">
+    <h2>Pendientes</h2>
+    {{- $revision := add (len $enRevision) (len $caducadas) -}}
+    <p class="panel-cifra">{{ $revision }} en revisión
+      {{- with $peticiones }} · {{ .total }} peticiones abiertas{{ else }} · peticiones: sin datos{{ end }}</p>
+    {{- if gt $revision 0 }}
+      <ul class="panel-lista">
+        {{- range $enRevision }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="panel-etq">en revisión</span></li>{{ end }}
+        {{- range $caducadas }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span class="panel-etq caducada">revisión caducada</span></li>{{ end }}
+      </ul>
+    {{- end }}
+    {{- with $peticiones }}
+      {{- if gt .total 0 }}
+      <ul class="panel-lista">
+        {{- range first 5 .abiertas }}
+        <li><a href="{{ .url }}" rel="noopener">{{ .titulo }}</a>
+          <span class="panel-etq {{ .etiqueta }}">{{ if eq .etiqueta "validar" }}aviso{{ else }}petición{{ end }}</span></li>
+        {{- end }}
+      </ul>
+      {{- if gt .total 5 }}<p class="panel-meta">y {{ sub .total 5 }} más en la lista completa.</p>{{ end }}
+      {{- end }}
+      <p class="panel-meta">
+        <a href="https://github.com/{{ site.Params.repoGitHub }}/issues" rel="noopener">Ver todas las peticiones</a>
+        {{- with .ultimo_commit }} · última actualización del repositorio: {{ (time .).Format "2 de enero de 2006" }}{{ end }}
+      </p>
+    {{- end }}
+  </div>
+
+</section>
+
+<style>
+  .panel-estado {
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    padding: 1.2rem 1.4rem; margin: 0 0 2rem;
+    border: 1px solid #dfe6ee; border-radius: 6px; background: #f7fafd;
+  }
+  .panel-bloque { flex: 1 1 18rem; }
+  .panel-bloque h2 {
+    font-size: 1rem; text-transform: uppercase; letter-spacing: .06em;
+    color: #4b5b6b; margin: 0 0 .6rem;
+  }
+  .panel-destacado { font-size: 1.15rem; font-weight: 600; margin: 0 0 .3rem; }
+  .panel-destacado a { text-decoration: none; }
+  .panel-meta { font-size: .88em; color: #5a6b7b; margin: .3rem 0 0; }
+  .panel-cifra { font-weight: 600; margin: 0 0 .5rem; }
+  .panel-lista { list-style: none; margin: 0 0 .6rem; padding: 0; font-size: .95em; }
+  .panel-lista li { margin-bottom: .35rem; }
+  .panel-etq {
+    font-size: .75em; text-transform: uppercase; letter-spacing: .04em;
+    padding: .1rem .4rem; border-radius: 3px; background: #e3ebf3; color: #33505f;
+  }
+  .panel-etq.validar { background: #fdf3d0; color: #7a5c00; }
+  .panel-etq.caducada { background: #fadcd9; color: #8a2b20; }
+</style>

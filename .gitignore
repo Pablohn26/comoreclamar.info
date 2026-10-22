@@ -11,3 +11,6 @@ Thumbs.db
 # Entornos locales / secretos
 .env
 .env.*
+
+# Dato generado en el build (issues del repositorio)
+/data/peticiones.json
