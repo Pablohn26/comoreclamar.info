@@ -1,0 +1,14 @@
+# robots.txt generado por Hugo.
+# Mientras el sitio vive en preproducción (parámetro staging = true) no se indexa:
+# su contenido es el mismo que el del sitio publicado y competiría con él.
+# Al pasar al dominio principal basta con poner staging = false en hugo.toml.
+{{- if .Site.Params.staging }}
+User-agent: *
+Disallow: /
+{{- else }}
+User-agent: *
+Disallow: /category/
+Disallow: /tag/
+
+Sitemap: {{ .Site.Params.canonicalBase }}sitemap.xml
+{{- end }}

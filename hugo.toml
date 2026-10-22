@@ -8,6 +8,11 @@ disqusShortname = ""
 
 [params]
   description = "El que no reclama es porque no quiere."
+  # Dirección definitiva del contenido (para la canónica).
+  canonicalBase = "https://comoreclamar.info"
+  # true = preproducción: no se indexa (robots + noindex).
+  # Al pasar al dominio principal, poner false.
+  staging = true
 
 [taxonomies]
   category = "category"

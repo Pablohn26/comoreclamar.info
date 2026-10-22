@@ -6,6 +6,12 @@
 <link rel="pingback" href="{{ "xmlrpc.php" | absURL }}">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{- /* Canónica: siempre la dirección definitiva, para que la copia de
+       preproducción no compita en buscadores con el sitio publicado. */}}
+<link rel="canonical" href="{{ printf "%s%s" .Site.Params.canonicalBase .RelPermalink }}">
+{{- if .Site.Params.staging }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Cabin">
