@@ -1,0 +1,55 @@
+{
+ "fuente": "divisiones oficiales por municipio (Ayuntamientos)",
+ "recogido": "2026-10-23",
+ "regla": "El distrito solo se pregunta si el municipio tiene divisiones Y oficinas de consumo por distrito.",
+ "municipios": {
+  "Madrid": {
+   "comunidad": "Madrid",
+   "tipo": "distrito",
+   "lista": [
+    "Arganzuela",
+    "Barajas",
+    "Carabanchel",
+    "Centro",
+    "Chamartín",
+    "Chamberí",
+    "Ciudad Lineal",
+    "Fuencarral-El Pardo",
+    "Hortaleza",
+    "Latina",
+    "Moncloa-Aravaca",
+    "Moratalaz",
+    "Puente de Vallecas",
+    "Retiro",
+    "Salamanca",
+    "San Blas-Canillejas",
+    "Tetuán",
+    "Usera",
+    "Vicálvaro",
+    "Villa de Vallecas",
+    "Villaverde"
+   ],
+   "oficinas_por_distrito": true,
+   "fuente": "https://www.madrid.es · OMIC Juntas de Distrito"
+  },
+  "Barcelona": {
+   "comunidad": "Cataluña",
+   "tipo": "distrito",
+   "lista": [
+    "Ciutat Vella",
+    "Eixample",
+    "Sants-Montjuïc",
+    "Les Corts",
+    "Sarrià-Sant Gervasi",
+    "Gràcia",
+    "Horta-Guinardó",
+    "Nou Barris",
+    "Sant Andreu",
+    "Sant Martí"
+   ],
+   "oficinas_por_distrito": false,
+   "nota": "Barcelona tiene una sola OMIC en Ronda Sant Pau 43-45: el distrito no filtra, así que no se pregunta.",
+   "fuente": "https://ajuntament.barcelona.cat/omic/es"
+  }
+ }
+}

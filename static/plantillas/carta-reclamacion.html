@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>{{TITULO}}</title>
+<style>
+  @page { size: A4; margin: 22mm 20mm; }
+  * { box-sizing: border-box; }
+  body { font: 11.5pt/1.55 "Times New Roman", Georgia, serif; color: #111; margin: 0; }
+  .remitente { font-size: 10pt; line-height: 1.4; margin-bottom: 14mm; }
+  .remitente b { font-size: 10.5pt; }
+  .destinatario { margin: 0 0 8mm 55%; font-size: 10.5pt; line-height: 1.45; }
+  .lugar-fecha { text-align: right; margin: 0 0 10mm; font-size: 10.5pt; }
+  h1 { font-size: 12pt; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 8mm; text-align: center;
+       border-bottom: 1px solid #999; padding-bottom: 4mm; }
+  p { margin: 0 0 3.5mm; text-align: justify; }
+  .cuerpo p:first-child { margin-top: 0; }
+  ul { margin: 0 0 3.5mm 6mm; padding: 0; }
+  li { margin-bottom: 1.5mm; }
+  .firma { margin-top: 16mm; }
+  .firma .linea { border-top: 1px solid #666; width: 70mm; margin-bottom: 2mm; }
+  .firma small { color: #444; font-size: 9.5pt; }
+  .pie { margin-top: 12mm; padding-top: 3mm; border-top: 1px solid #ccc; font-size: 8.5pt; color: #666; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<div class="remitente">
+  <b>{{NOMBRE}}</b><br>
+  DNI {{DNI}}<br>
+  {{DOMICILIO}}<br>
+  {{CONTACTO}}
+</div>
+
+<div class="destinatario">
+  <b>{{DESTINATARIO_NOMBRE}}</b><br>
+  {{DESTINATARIO_DIRECCION}}
+</div>
+
+<div class="lugar-fecha">{{LUGAR}}, a {{FECHA}}</div>
+
+<h1>{{TITULO}}</h1>
+
+<div class="cuerpo">
+{{CUERPO}}
+</div>
+
+<div class="firma">
+  <div class="linea"></div>
+  {{NOMBRE}}<br>
+  <small>DNI {{DNI}}</small>
+</div>
+
+<div class="pie">
+  Documento generado con cómoreclamar.info. Los datos se han rellenado en el navegador y no se
+  han enviado a ningún servidor. Verifica los datos de la empresa antes de enviarlo.
+</div>
+
+</body>
+</html>

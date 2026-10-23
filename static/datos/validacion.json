@@ -1,0 +1,242 @@
+{
+ "generado": "2026-10-23T04:56:30",
+ "total": 19,
+ "ok": 19,
+ "bloqueadas": 0,
+ "fallan": 0,
+ "caidas_temporales": 0,
+ "urls": [
+  {
+   "url": "https://www.iberdrola.es/atencion-cliente",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://www.iberdrola.es/informacion/atencion-cliente",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null,
+   "redirige_a": "https://www.iberdrola.es/informacion/atencion-cliente"
+  },
+  {
+   "url": "https://www.iberdrola.es/aviso-legal",
+   "clave": "politica",
+   "codigo": 200,
+   "final": "https://www.iberdrola.es/informacion/404_error",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null,
+   "redirige_a": "https://www.iberdrola.es/informacion/404_error"
+  },
+  {
+   "url": "https://www.aepd.es",
+   "clave": "autoridad",
+   "codigo": 200,
+   "final": "https://www.aepd.es",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "cookies",
+    "privacidad",
+    "derechos"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://www.amazon.es/gp/help/customer/display.html",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://www.amazon.es/gp/help/customer/display.html?nodeId=G508510",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null,
+   "redirige_a": "https://www.amazon.es/gp/help/customer/display.html?nodeId=G508510"
+  },
+  {
+   "url": "https://www.amazon.es/gp/help/customer/display.html?nodeId=201909010",
+   "clave": "politica",
+   "codigo": 200,
+   "final": "https://www.amazon.es/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "cookies",
+    "privacidad",
+    "derechos"
+   ],
+   "error": null,
+   "redirige_a": "https://www.amazon.es/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ"
+  },
+  {
+   "url": "https://www.mercadona.es/atencion-al-cliente/",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://www.mercadona.es/atencion-al-cliente/",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null
+  },
+  {
+   "url": "https://info.mercadona.es/es/politica-de-privacidad",
+   "clave": "politica",
+   "codigo": 200,
+   "final": "https://info.mercadona.es/es/politica-de-privacidad",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "cookies",
+    "privacidad",
+    "derechos"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://info.mercadona.es/es/atencion-al-cliente/formulario-arco",
+   "clave": "derechosUrl",
+   "codigo": 200,
+   "final": "https://info.mercadona.es/es/atencion-al-cliente/formulario-arco",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "cookies",
+    "privacidad",
+    "derechos"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://tienda.mercadona.es/legal/cookies/es/",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://tienda.mercadona.es/legal/cookies/es/",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "cookies",
+    "privacidad"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://www.mercadona.es/?cookieConfig=true",
+   "clave": "configurador",
+   "codigo": 200,
+   "final": "https://www.mercadona.es/?cookieConfig=true",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null
+  },
+  {
+   "url": "https://sede.comunidad.madrid/",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://sede.comunidad.madrid/",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null
+  },
+  {
+   "url": "https://sede.comunidad.madrid/proteccion-datos",
+   "clave": "politica",
+   "codigo": 200,
+   "final": "https://sede.comunidad.madrid/servicios-ciudadania/proteccion-datos",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null,
+   "redirige_a": "https://sede.comunidad.madrid/servicios-ciudadania/proteccion-datos"
+  },
+  {
+   "url": "https://www.comunidad.madrid/servicios/consumo",
+   "clave": "enlace",
+   "codigo": 200,
+   "final": "https://www.comunidad.madrid/consumo",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "derechos"
+   ],
+   "error": null,
+   "redirige_a": "https://www.comunidad.madrid/consumo"
+  },
+  {
+   "url": "https://consum.gencat.cat/",
+   "clave": "enlace",
+   "codigo": 200,
+   "final": "https://consum.gencat.cat/ca/inici",
+   "ok": true,
+   "estado": "ok",
+   "senales": [],
+   "error": null,
+   "redirige_a": "https://consum.gencat.cat/ca/inici"
+  },
+  {
+   "url": "https://consumo.xunta.gal/es",
+   "clave": "enlace",
+   "codigo": 200,
+   "final": "https://consumo.xunta.gal/es",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "derechos"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://www.euskadi.eus/consumo/",
+   "clave": "enlace",
+   "codigo": 200,
+   "final": "https://www.kontsumobide.euskadi.eus/inicio/",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "derechos"
+   ],
+   "error": null,
+   "redirige_a": "https://www.kontsumobide.euskadi.eus/inicio/"
+  },
+  {
+   "url": "https://www.jcyl.es/web/es/consumo.html",
+   "clave": "enlace",
+   "codigo": 200,
+   "final": "https://www.jcyl.es/web/es/consumo.html",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "derechos"
+   ],
+   "error": null
+  },
+  {
+   "url": "https://www.facua.org/",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://facua.org/",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "privacidad",
+    "derechos"
+   ],
+   "error": null,
+   "redirige_a": "https://facua.org/"
+  },
+  {
+   "url": "https://www.defensordelpueblo.es",
+   "clave": "url",
+   "codigo": 200,
+   "final": "https://www.defensordelpueblo.es",
+   "ok": true,
+   "estado": "ok",
+   "senales": [
+    "privacidad",
+    "derechos"
+   ],
+   "error": null
+  }
+ ]
+}

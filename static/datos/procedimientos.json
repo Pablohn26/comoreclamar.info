@@ -1,0 +1,191 @@
+{
+ "fuente": "Ley 39/2015 (procedimiento administrativo común) y Ley 29/1998 (jurisdicción)",
+ "recogido": "2026-10-23",
+ "nota": "Lo común está en la ley estatal; lo concreto (sede, registro, modelos) es de cada administración.",
+ "procedimientos": {
+  "alegacion": {
+   "nombre": "Alegaciones en un procedimiento",
+   "cuando": "Mientras el procedimiento está abierto: trámite de audiencia o plazo de alegaciones.",
+   "plazo_general": "El que fije la convocatoria o el acuerdo de inicio (habitual: 10 a 15 días).",
+   "silencio": "No hay silencio propio: las alegaciones se resuelven en la resolución final.",
+   "base_legal": "Ley 39/2015, arts. 76 y 82",
+   "requisitos": [
+    "Identificación del expediente",
+    "Hechos con fechas",
+    "Qué se pide"
+   ]
+  },
+  "recurso-alzada": {
+   "nombre": "Recurso de alzada",
+   "cuando": "Contra una resolución que no agota la vía administrativa.",
+   "plazo_general": "Un mes desde la notificación para interponerlo.",
+   "silencio": "Si no se resuelve en tres meses, se entiende desestimado (se puede ir a lo contencioso).",
+   "base_legal": "Ley 39/2015, arts. 121 y 122",
+   "requisitos": [
+    "Resolución y fecha de notificación",
+    "Motivos de oposición",
+    "Qué se solicita"
+   ]
+  },
+  "defensor-pueblo": {
+   "nombre": "Queja al Defensor del Pueblo",
+   "cuando": "Cuando la Administración tarda, no contesta o actúa de forma que consideras incorrecta.",
+   "plazo_general": "No tiene plazo, pero no suspende los plazos de los recursos.",
+   "silencio": "No aplica: no es un recurso, es una supervisión.",
+   "base_legal": "Ley Orgánica 3/1981, del Defensor del Pueblo",
+   "requisitos": [
+    "Haber acudido antes a la Administración",
+    "Documentación del expediente"
+   ]
+  },
+  "contencioso": {
+   "nombre": "Recurso contencioso-administrativo",
+   "cuando": "Cuando la vía administrativa está agotada y se quiere acudir a los tribunales.",
+   "plazo_general": "Dos meses desde la resolución o desde el silencio.",
+   "silencio": "No aplica.",
+   "base_legal": "Ley 29/1998, arts. 45 y 46",
+   "requisitos": [
+    "Resolución o silencio",
+    "Abogado y procurador",
+    "Documentación administrativa completa"
+   ]
+  }
+ },
+ "administraciones": {
+  "Andalucía": {
+   "nombre": "Andalucía",
+   "sede": "https://www.juntadeandalucia.es/servicios/sede.html",
+   "registro": "Registro General de la Junta de Andalucía",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015)."
+  },
+  "Aragón": {
+   "nombre": "Aragón",
+   "sede": null,
+   "registro": "Registro General del Gobierno de Aragón",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_probable": "https://sede.aragon.es",
+   "sede_motivo": "no se pudo verificar (URLError)"
+  },
+  "Canarias": {
+   "nombre": "Canarias",
+   "sede": "https://sede.gobiernodecanarias.org",
+   "registro": "Registro General del Gobierno de Canarias",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.gobiernodecanarias.org/sede/"
+  },
+  "Cantabria": {
+   "nombre": "Cantabria",
+   "sede": "https://sede.cantabria.es",
+   "registro": "Registro General del Gobierno de Cantabria",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.cantabria.es/sede/"
+  },
+  "Castilla y León": {
+   "nombre": "Castilla y León",
+   "sede": "https://www.tramitacastillayleon.jcyl.es/",
+   "registro": "Registro General de la Junta de Castilla y León",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://www.tramitacastillayleon.jcyl.es/web/es/sede-electronica.html"
+  },
+  "Castilla-La Mancha": {
+   "nombre": "Castilla-La Mancha",
+   "sede": null,
+   "registro": "Registro General de la Junta de Comunidades de Castilla-La Mancha",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_probable": "https://sede.jccm.es",
+   "sede_motivo": "no se pudo verificar (URLError)"
+  },
+  "Cataluña": {
+   "nombre": "Cataluña",
+   "sede": "https://seu.gencat.cat",
+   "registro": "Registre General de la Generalitat de Catalunya",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://web.gencat.cat/ca/seu-electronica"
+  },
+  "Ceuta": {
+   "nombre": "Ceuta",
+   "sede": "https://sede.ceuta.es",
+   "registro": "Registro General de la Ciudad Autónoma de Ceuta",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015)."
+  },
+  "Comunidad Valenciana": {
+   "nombre": "Comunidad Valenciana",
+   "sede": "https://sede.gva.es",
+   "registro": "Registro General de la Generalitat Valenciana",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.gva.es/va/"
+  },
+  "Extremadura": {
+   "nombre": "Extremadura",
+   "sede": "https://sede.juntaex.es",
+   "registro": "Registro General de la Junta de Extremadura",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.gobex.es/SEDE/"
+  },
+  "Galicia": {
+   "nombre": "Galicia",
+   "sede": "https://sede.xunta.gal",
+   "registro": "Registro General de la Xunta de Galicia",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.xunta.gal/portada"
+  },
+  "Illes Balears": {
+   "nombre": "Illes Balears",
+   "sede": null,
+   "registro": "Registro de la Administración de la Comunidad Autónoma de las Illes Balears",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_probable": "https://seu.caib.es",
+   "sede_motivo": "no se pudo verificar (URLError)"
+  },
+  "La Rioja": {
+   "nombre": "La Rioja",
+   "sede": null,
+   "registro": "Registro General del Gobierno de La Rioja",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_probable": "https://sede.larioja.org",
+   "sede_motivo": "no se pudo verificar (URLError)"
+  },
+  "Madrid": {
+   "nombre": "Madrid",
+   "sede": "https://sede.comunidad.madrid",
+   "registro": "Registro General de la Comunidad de Madrid",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015)."
+  },
+  "Melilla": {
+   "nombre": "Melilla",
+   "sede": "https://sede.melilla.es",
+   "registro": "Registro General de la Ciudad Autónoma de Melilla",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://sede.melilla.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME"
+  },
+  "Navarra": {
+   "nombre": "Navarra",
+   "sede": null,
+   "registro": "Registro General del Gobierno de Navarra",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_probable": "https://sede.navarra.es",
+   "sede_motivo": "no se pudo verificar (URLError)"
+  },
+  "País Vasco": {
+   "nombre": "País Vasco",
+   "sede": "https://www.euskadi.eus/sede-electronica/",
+   "registro": "Registro General del Gobierno Vasco",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015)."
+  },
+  "Principado de Asturias": {
+   "nombre": "Principado de Asturias",
+   "sede": "https://sede.asturias.es",
+   "registro": "Registro General del Principado de Asturias",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://miprincipado.asturias.es/"
+  },
+  "Región de Murcia": {
+   "nombre": "Región de Murcia",
+   "sede": "https://sede.carm.es",
+   "registro": "Registro General de la Comunidad Autónoma de la Región de Murcia",
+   "silencio_general": "Tres meses desde que se presenta, con sentido desestimatorio salvo que la norma del procedimiento diga otra cosa (art. 24 de la Ley 39/2015).",
+   "sede_redirige_a": "https://validate.perfdrive.com/?ssa=86af7e76-de38-4278-932d-59670209fd72&ssb=66445298912&ssc=https%3A%2F%2Fsede.carm.es%2Fweb%2Fpagina%3FIDCONTENIDO%3D11%26IDTIPO%3D180&ssi=5238b144-di4m-437e-9ed0-ce87a27383c8&ssk=botmanager_support@radware.com&ssm=05769166537004349106718405959440&ssn=036f123a8f93d493f1dc9ef2a97a6d9c3eec2dc6bbea-bb28-4721-a84d3b&sso=1ca9f3c4-313b2c45167e53b54d20f96ae97876edc87be6dab4863b3d&ssp=48214757401792743397179275213790917&ssq=59267212407126342535624071975504599691093&ssr=MjA3LjE4OC4xNDEuMjQw&sst=Mozilla/5.0%20(X11;%20Linux%20x86_64)%20comoreclamar-validador/1.0&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImNhcm0uZXMiLCJfX3V6bWYiOiI3ZjkwMDAyZGM2YmJlYS1iYjI4LTQ3MjEtYTNjNC0zMTNiMmM0NTE2N2UxLTE3OTI3MjQwNzE4NzkwLTAwNGFhZDk3ODFiNWIzOTRkM2UxMCIsInV6bXgiOiI3ZmMwMDBhM2NkOWJhNC1kOTc4LTQzODEtODBkMy04NjQyNjhkMjhjNDQxLTE3OTI3MjQwNzE4NzkwLTAwYTIzMzBlZDFhN2ZlN2RiZGQxMCJ9"
+  }
+ },
+ "actualizado": "2026-10-23"
+}
