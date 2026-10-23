@@ -878,7 +878,7 @@ let DIVISIONES = null, DIVISIONES_CARGANDO = false;
 let OMIC_NACIONAL = null, OMIC_NAC_CARGANDO = false;
 let PROCEDIMIENTOS = null, PROC_CARGANDO = false;
 
-const BASE_DATOS = new URL("../datos/", location.href).href;
+const BASE_DATOS = "/datos/";
 
 async function cargarProcedimientos(){
   if (PROCEDIMIENTOS || PROC_CARGANDO) return;
@@ -1260,7 +1260,7 @@ function vistaEmpresa(){
         <b>¿La web no te deja configurar las cookies?</b>
         <p style="margin:6px 0 10px;color:var(--gris)">Si solo puedes aceptar, o rechazar cuesta más que aceptar,
         hay una vía concreta.</p>
-        <a class="boton sec" href="../guias/denunciar-cookies.html" target="_blank" rel="noopener">Cómo denunciarlo</a>
+        <a class="boton sec" href="/guias/denunciar-cookies.html" target="_blank" rel="noopener">Cómo denunciarlo</a>
       </div>
       ${resumenValidacion()}
       <div class="fuentes"><b>Fuentes:</b> ${e.fuentes} · Reglamento (UE) 2016/679, arts. 12-15<br>

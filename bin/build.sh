@@ -35,3 +35,25 @@ done < <(find content/posts -name '*.md' -print0)
 echo "Artículos validados: $(find content/posts -name '*.md' | wc -l) · apartados: $apartados"
 
 hugo --minify --destination "$DESTINO" "$@"
+
+# La portada es la herramienta: se copia el prototipo sobre el index del tema.
+# Las rutas del prototipo son absolutas, así que funciona igual en / y en /prototipo/.
+if [ -f "$DESTINO/prototipo/index.html" ]; then
+  # La portada es la herramienta, pero sin la etiqueta de «prototipo» ni el aviso de maqueta.
+  python3 - "$DESTINO" <<'PY2'
+import sys
+destino = sys.argv[1]
+t = open(f"{destino}/prototipo/index.html", encoding="utf-8").read()
+t = t.replace("<title>Prototipo · cómoreclamar</title>",
+              "<title>cómoreclamar.info · Cómo reclamar a una empresa o a una administración</title>")
+t = t.replace('<div class="demo">prototipo · datos de ejemplo</div>', "")
+t = t.replace("""<p><b>Prototipo de diseño.</b> Los datos de ejemplo son de muestra y la herramienta guarda todo
+    en este navegador: nada se envía a ningún servidor.</p>""",
+              """<p><b>cómoreclamar.info</b> · Te decimos a quién reclamar, con qué palabras y en qué plazo.
+    Lo que escribes se queda en tu navegador: no se envía a ningún servidor.</p>""")
+open(f"{destino}/index.html", "w", encoding="utf-8").write(t)
+PY2
+  echo "Portada: la herramienta (sin etiqueta de prototipo, con noindex)"
+else
+  echo "AVISO: no hay prototipo; la portada sigue siendo la del tema" >&2
+fi
