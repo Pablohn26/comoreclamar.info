@@ -816,7 +816,7 @@ function pintarEmpresas(q, sector){
 
   lista.innerHTML = hits.length
     ? hits.map(([k, e]) => `<a class="tarjeta" href="#/empresa/${k}">
-        <b>${e.nombre}</b><small>${e.sector} · ${e.tipo.toLowerCase()}</small></a>`).join("")
+        <b>${e.nombre}</b><small>${etiquetaSector(e)}</small></a>`).join("")
     : `<a class="tarjeta" href="#/pedir${sector ? "?empresa=" + encodeURIComponent("") + "&sector=" + encodeURIComponent(sector) : ""}">
         <b>No hay guía todavía${sector ? " en " + sector : ""}</b><small>Pídela y la preparamos →</small></a>`;
 }
@@ -846,7 +846,7 @@ function vistaPortada(){
     <div class="seccion-titulo">Empresas con guía</div>
     <div class="tarjetas" id="lista-empresas">
       ${Object.entries(EMPRESAS).map(([k,e])=>`
-        <a class="tarjeta" href="#/empresa/${k}"><b>${e.nombre}</b><small>${e.sector} · ${e.tipo.toLowerCase()}</small></a>`).join("")}
+        <a class="tarjeta" href="#/empresa/${k}"><b>${e.nombre}</b><small>${etiquetaSector(e)}</small></a>`).join("")}
     </div>
 
     <div class="seccion-titulo">Las vías, una a una</div>
@@ -936,6 +936,12 @@ async function cargarOMICNacional(){
 }
 
 /* comparación tolerante: sin acentos ni mayúsculas */
+/* «Sector público · pública» no aporta nada: se queda en «Sector público». */
+function etiquetaSector(e){
+  const tipo = (e.tipo || "").toLowerCase();
+  return e.sector.toLowerCase() === tipo ? e.sector : `${e.sector} · ${tipo}`;
+}
+
 function normal(s){
   return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 }
@@ -1386,7 +1392,7 @@ function vistaVia(slug){
 
   cont.innerHTML = `<ul class="lista-reclamaciones" style="border-top:1px solid var(--linea)">
     ${entidades.map(([k, e]) => `<li>
-      <span style="flex:1"><b>${e.nombre}</b><br><small style="color:var(--gris)">${e.sector} · ${e.tipo.toLowerCase()}</small></span>
+      <span style="flex:1"><b>${e.nombre}</b><br><small style="color:var(--gris)">${etiquetaSector(e)}</small></span>
       <button class="boton" style="padding:8px 14px;font-size:13.5px" data-empezar="${k}">Empezar</button>
     </li>`).join("")}
   </ul>`;
@@ -1682,7 +1688,7 @@ function pintarResultadosEmpresas(){
   }
 
   cont.innerHTML = `<ul class="lista-reclamaciones">${hits.map(([k,e])=>`<li>
-      <span style="flex:1"><b>${e.nombre}</b><br><small style="color:var(--gris)">${e.sector} · ${e.tipo.toLowerCase()}</small></span>
+      <span style="flex:1"><b>${e.nombre}</b><br><small style="color:var(--gris)">${etiquetaSector(e)}</small></span>
       <button class="boton sec" style="padding:7px 12px;font-size:13px" data-anadir="${k}">Añadir</button>
     </li>`).join("")}</ul>`;
 
