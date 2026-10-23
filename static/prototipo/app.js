@@ -939,7 +939,11 @@ async function cargarOMICNacional(){
 /* «Sector público · pública» no aporta nada: se queda en «Sector público». */
 function etiquetaSector(e){
   const tipo = (e.tipo || "").toLowerCase();
-  return e.sector.toLowerCase() === tipo ? e.sector : `${e.sector} · ${tipo}`;
+  const sector = (e.sector || "").toLowerCase();
+  // «pública» se reconoce por su raíz: sirve para «público» y para «pública»
+  const raiz = tipo.replace(/[ao]$/, "");
+  if (raiz && sector.includes(raiz)) return e.sector;
+  return `${e.sector} · ${tipo}`;
 }
 
 function normal(s){
