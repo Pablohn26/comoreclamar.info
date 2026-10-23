@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="cómoreclamar.info">
+  <rect width="48" height="48" rx="11" fill="#14171a"/>
+  <path d="M10 21c4.5-6.5 11-6.5 14.5-1.5S36 25 38 19"
+        fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round"/>
+  <circle cx="17" cy="33" r="2.6" fill="#ffffff"/>
+  <circle cx="24" cy="33" r="2.6" fill="#ffffff"/>
+  <circle cx="31" cy="33" r="2.6" fill="#ffffff"/>
+</svg>
