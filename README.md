@@ -1,5 +1,13 @@
 # comoreclamar.info
 
+> ## ⚠️ DOS PENDIENTES QUE NO SE TOCAN EN CUALQUIER SESIÓN
+>
+> **1. El bot de contenido se cierra en una sesión propia.** Dedicada y separada del trabajo de la web:
+> necesita su contexto, sus credenciales y su espacio. No se empieza en mitad de otra tarea.
+>
+> **2. Falta sincronizar con GitHub.** El commit `94f108b` está en local y **sin subir**: el sitio público
+> no tiene todavía la herramienta nueva. **No se sube hasta que Pablo lo pida.**
+
 Sitio estático de [comoreclamar.info](https://comoreclamar.info), hecho con
 [Hugo](https://gohugo.io). El contenido vive en este repositorio: cada cambio es
 un commit y una revisión, así que el historial es la garantía de que lo publicado
